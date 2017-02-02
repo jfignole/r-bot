@@ -1,0 +1,65 @@
+body {
+  background-color: inherit;
+}
+
+h1 {
+  color:#E31937;
+  font-family: Arial;
+  font-size:200%;
+}
+form {
+  width: 90%;
+  margin: 0 auto;
+}
+#rm_c {
+  border:5px solid black;
+  font-family:serif;
+  font-size:100%;
+}
+div.row_1  {
+
+
+}
+div.box_1 {
+  display:inline-block;
+  width:10%;
+  float: left;
+}
+div.box_2 {
+  display:inline-block;
+  width:10%;
+  float: left;
+}
+div.box_3 {
+  display:inline-block;
+  width:10%;
+  float: right;
+}
+div.row_2  {
+
+}
+
+div.row_3  {
+
+}
+
+div.row_4  {
+
+}
+
+div.row_5  {
+
+}
+
+div.row_6  {
+
+}
+
+label {
+  background-color: grey;
+  border:1px solid black;
+}
+
+input {
+    border:1px solid black;
+}
