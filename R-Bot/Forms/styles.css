@@ -5,61 +5,114 @@ body {
 h1 {
   color:#E31937;
   font-family: Arial;
-  font-size:200%;
+  font-size:300%;
 }
 form {
   width: 90%;
   margin: 0 auto;
 }
-#rm_c {
-  border:5px solid black;
-  font-family:serif;
-  font-size:100%;
+fieldset {
+	padding: 1em;
+	border: 5px solid black;
+}
+div.box_1 {
+  box-sizing: border-box;
+  width:25%;
+  float: left;
+  padding: 0.2em;
+  margin-right:0.5em;
+  
+}
+div.box_2 {
+ box-sizing: border-box;
+  width:25%;
+  float: left;
+  padding: 0.2em;
+  margin-right:0.5em;
+}
+div.box_3 {
+  box-sizing: border-box;
+  width:25%;
+  float: left;
+  padding: 0.2em;
+  margin-right:0.5em;
 }
 div.row_1  {
 
-
-}
-div.box_1 {
-  display:inline-block;
-  width:10%;
+  box-sizing: border-box;
+  width:100%;
   float: left;
-}
-div.box_2 {
-  display:inline-block;
-  width:10%;
-  float: left;
-}
-div.box_3 {
-  display:inline-block;
-  width:10%;
-  float: right;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 div.row_2  {
-
+  box-sizing: border-box;
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 
 div.row_3  {
-
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 
 div.row_4  {
-
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 
 div.row_5  {
-
+  box-sizing: border-box;
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 
 div.row_6  {
+  box-sizing: border-box;
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
+}
+div.row_7  {
+  box-sizing: border-box;
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
+}
 
+div.row_8  {
+  box-sizing: border-box;
+  width:100%;
+  float: left;
+  border-top: 1px dashed black;
+  border-left:1px dashed black;
+  border-right:1px dashed black;
 }
 
 label {
   background-color: grey;
   border:1px solid black;
+  width:15px;
 }
 
 input {
     border:1px solid black;
+
 }
