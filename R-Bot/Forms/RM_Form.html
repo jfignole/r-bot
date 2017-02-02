@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	GPO RM Form IIB Onshore
+	</title>
+</head>
+<body>
+	<h1>CGI</h1>
+	<form>
+		<div class="rm_container">
+		<label><b>POSITION TITLE</b></label>
+		<label><b>SEAT LOCATION</b></label>
+		<label><b>DATE SUBMITTED TO CGI</b></label><br>
+		<input type="text" placeholder="Position Title" name="ptitle">
+		<input type="text" placeholder="Seat Location" name="sloc">
+		<input type="date" placeholder="mm/dd/yyyy" name="dsub"><br>
+		<label><b># OF RESOURCES NEEDED</b></label>
+		<label><b>PROJECT START DATE</b></label>
+		<label><b>FIXED PRICE OR TM</b></label><br>
+		<input type="number" placeholder="0" name="numres">
+		<input type="date" placeholder="mm/dd/yyyy" name="pstart">
+		<input type="text" placeholder="FP or TM" name="fptm"><br>
+		<label><b>TYPE</b></label><br>
+		<input type="radio" name="type" value="development">Development<br>
+		<input type="radio" name="type" value="testing">Testing<br>
+		<input type="radio" name="type" value="support">Support<br>
+		<input type="radio" name="type" value="consulting">Consulting<br>
+		<label><b>ESTIMATED RESOURCE START DATE</b></label>
+		<label><b>ESTIMATED END DATE</b></label><br>
+		<input type="date" placeholder="mm/dd/yyyy" name="rsdate">
+		<input type="date" placeholder="mm/dd/yyyy" name="rendate"><br>
+		<label><b>PROJECT/CLIENT</b></label>
+		<label><b>CONFIDENCE (0-100%)</b></label><br>
+		<input type="text" name="proj_client">
+		<input type="text" placeholder="0%" name="conf_perc"><br>
+		<label><b>HIRING MANAGER (PNC ONLY)</b></label>
+		<label><b>CIO/SENIOR MANAGER (PNC ONLY)</b></label>
+		<label><b>CGI ENGAGMENT MANAGER</b></label><br>
+		<input type="text" placeholder="Enter Name" name="hir_manag">
+		<input type="text" placeholder="Enter Name" name="sen_manag">
+		<input type="text" placeholder="Enter Name" name="engag_manag"><br>
+		<label><b>PROJECT CODE #</b></label>
+		<label><b>TARGET SALARY</b></label>
+		<label><b>RATE CARD-CATEGORY-LEVEL</b></label><br>
+		<input type="number" placeholder="000000000000000" name="pcode">
+		<input type="number" placeholder="00000" name="t_salary">
+		<input type="text" placeholder="level" name="rcc_level"><br>
+		<label><b>POSITION DESCRIPTION</b></label><br>
+		<textarea id = "Position Requirements" rows="8" cols="80">Requirements and Responsibilities</textarea><br>
+		<label><b>RECOMMENDED HIRING</b></label><br>
+		<input type="radio" name="rec_hire" value="Direct">Direct<br>
+		<input type="radio" name="rec_hire" value="Temp to Perm">Temp to Perm<br>
+		<input type="radio" name="rec_hire" value="Contractor">Contractor<br>
+		<label><b>NOTES (Optional):</b></label><br>
+		<textarea id="Notes" rows="10" cols="10">Notes</textarea>
+	</div>
+</form>
+</body>
+</html>
