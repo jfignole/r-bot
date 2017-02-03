@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
   <title>Login</title>
 </head>
 <body>
-  <h1> Login</h1>
-  <form>
-    <div class="container">
-      <label><b>Username:</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required><br>
-      <label><b>Password:</b></label>
-      <input type="text" placeholder="Enter Password" name="pwd" required><br>
-      <button type="submit">Login</button>
-      <button type="button" class="cancelbtn">Cancel</button>
-    </div>
+<h1>CGI</h1>
+<table>
+  <form action="RM_Form.html" method="POST">
+	<tr><td colspan="2" id=t1><h2>Login</h2></tr></td>
+  <tr>
+      <th><b>Username:</b></th>
+      <td><input type="text" placeholder="Enter Username" name="uname" required></td>
+  </tr>
+  <tr>
+      <th><b>Password:</b></th>
+      <td><input type="text" placeholder="Enter Password" name="pwd" required></td>
+  </tr>
+  <tr>
+      <td><button type="button" class="cancelbtn">Cancel</button></td>
+      <td><button type="submit" class="log">Login</button></td>
+  </tr>
   </form>
+</table>
 </body>
 </html>

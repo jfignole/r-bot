@@ -1,65 +1,41 @@
-body {
-  background-color: inherit;
-}
-
 h1 {
   color:#E31937;
   font-family: Arial;
-  font-size:200%;
-}
-form {
-  width: 90%;
-  margin: 0 auto;
-}
-#rm_c {
-  border:5px solid black;
-  font-family:serif;
-  font-size:100%;
-}
-div.row_1  {
-
-
-}
-div.box_1 {
-  display:inline-block;
-  width:10%;
-  float: left;
-}
-div.box_2 {
-  display:inline-block;
-  width:10%;
-  float: left;
-}
-div.box_3 {
-  display:inline-block;
-  width:10%;
-  float: right;
-}
-div.row_2  {
-
+  font-size:400%;
 }
 
-div.row_3  {
-
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
-
-div.row_4  {
-
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1px;
+    text-align: left;
 }
-
-div.row_5  {
-
-}
-
-div.row_6  {
-
-}
-
-label {
+#t1{
+  text-align: center;
   background-color: grey;
-  border:1px solid black;
 }
-
-input {
-    border:1px solid black;
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: left;
+  background-color: grey;
+}
+button.cancelbtn {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+button.log {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5em;
+  padding-right: 5em;
 }
