@@ -1,0 +1,17 @@
+<form action="mail" method="post">
+  To:<select name="to">
+    <option value="HR">HR</option>
+    <option value="Vendor">Vendor</option>
+  </select><br/>
+  From:<input type="text" name="user"><br/>
+  Subject:<select name="subject">
+    <option value="Verification">Verification</option>
+    <option value="Validation">Validation</option>
+  </select><br/><br/>
+  Message:<select name="message">
+    <option value="Verification">Please verify that the information is correct.</option>
+    <option value="Validation">Please validate this form.</option>
+  </select>><br/>
+
+  <input type="submit" value="send" />
+</form>

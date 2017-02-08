@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+  <title>Login</title>
+</head>
+<body>
+<h1>CGI</h1>
+<table>
+  <form action="Login" method="POST" target="RM_Form.html">
+	<tr><td colspan="2" id=t1><h2>Login</h2></tr></td>
+  <tr>
+      <th><b>Username:</b></th>
+      <td><input type="text" placeholder="Enter Username" name="uname" required></td>
+  </tr>
+  <tr>
+      <th><b>Password:</b></th>
+      <td><input type="text" placeholder="Enter Password" name="pass" required></td>
+  </tr>
+  <tr>
+      <th><b>User Type:</b></th>
+      <td><select name="uType">
+          <option>Employee</option>
+          <option>HR</option>
+          <option>Vendor</option>
+        </select></td>
+  </tr>
+  <tr>
+      <td><button type="submit" class="log">Login</button></td>
+      <td><button type="submit" class="log" formaction="register.html">Register</button></td>
+  </tr>
+  </form>
+</table>
+</body>
+</html>

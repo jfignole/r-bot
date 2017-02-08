@@ -1,0 +1,26 @@
+create table RmEmForm
+(
+	position_title VARCHAR(20) NOT NULL,
+	seat_location VARCHAR(20) NOT NULL,
+	cgi_submit_dt DATETIME NOT NULL,
+	num_resource_need INTEGER NOT NULL,
+	proj_start_dt DATETIME NOT NULL,
+	FP_or_TM VARCHAR(2) NOT NULL,
+	job_type VARCHAR(20) NOT NULL,
+	est_resource_start_dt DATETIME NOT NULL,
+	est_resource_end_dt DATETIME NOT NULL,
+	proj_client VARCHAR(20) NOT NULL,
+	confidence INTEGER NOT NULL,
+	hiring_manager VARCHAR(50) NOT NULL,
+	senior_manager VARCHAR(50) NOT NULL,
+	cgi_engage_manager VARCHAR(50) NOT NULL,
+	proj_code INTEGER NOT NULL,
+	target_salary INTEGER NOT NULL,
+	rate_crd_cat_lvl VARCHAR(20) NOT NULL,
+	position_desc CHAR NOT NULL,
+	recommended_hiring VARCHAR(20) NOT NULL,
+	notes CHAR,
+	so_num INTEGER UNIQUE,
+	comments CHAR,
+    PRIMARY KEY (so_num)
+    )

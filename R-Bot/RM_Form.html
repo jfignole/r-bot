@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="styles.css">
+	<title>
+	GPO RM Form IIB Onshore
+	</title>
+</head>
+	<body>
+		<h1>CGI</h1>
+		<table>
+			<form method="POST">
+					<tr>
+							<th><b>POSITION TITLE</b></th>
+							<th><b>SEAT LOCATION</b></th>
+							<th><b>DATE SUBMITTED TO CGI</b></th>
+					</tr>
+					<tr>
+							<td><input type="text" placeholder="Position Title" name="ptitle"></td>
+							<td><input type="text" placeholder="Seat Location" name="sloc"></td>
+							<td><input type="date" placeholder="mm/dd/yyyy" name="dsub"></td>
+					</tr>
+					<tr>
+							<th><b># OF RESOURCES NEEDED</b></th>
+							<th><b>PROJECT START DATE</b></th>
+							<th><b>FIXED PRICE OR TM</b></th>
+					</tr>
+					<tr>
+						<td><input type="number" placeholder="0" min="0" name="numres"></td>
+						<td><input type="date" placeholder="mm/dd/yyyy" name="pstart"></td>
+						<td><select name="TMFP">
+										<option value="TM">TM</option>
+										<option value="FP">FP</option>
+								</select>
+						</td>
+					</tr>
+					<tr>
+							<th><b>TYPE</b></th>
+							<th><b>ESTIMATED RESOURCE START DATE</b></th>
+							<th><b>ESTIMATED END DATE</b></th>
+					</tr>
+					<tr>
+							<td rowspan="4"><input type="radio" name="type" value="development">Development<br>
+							<input type="radio" name="type" value="testing">Testing<br>
+							<input type="radio" name="type" value="support">Support<br>
+							<input type="radio" name="type" value="consulting">Consulting</td>
+							<td><input type="date" placeholder="mm/dd/yyyy" name="rsdate"></td>
+							<td><input type="date" placeholder="mm/dd/yyyy" name="rendate"></td>
+					</tr>
+					<tr>
+							<th><b>PROJECT/CLIENT</b></th>
+							<th><b>CONFIDENCE (0-100%)</b></th>
+					</tr>
+					<tr>
+							<td><input type="text" name="proj_client"></td>
+							<td><input type="number" name="conf_perc" min="0" max="100"></td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+							<th><b>HIRING MANAGER (PNC ONLY)</b></th>
+							<th><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
+							<th><b>CGI ENGAGMENT MANAGER</b></th>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="Enter Name" name="hir_manag"></td>
+						<td><input type="text" placeholder="Enter Name" name="sen_manag"></td>
+						<td><input type="text" placeholder="Enter Name" name="engag_manag"></td>
+					</tr>
+					<tr>
+							<th><b>PROJECT CODE #</b></th>
+							<th><b>TARGET SALARY</b></th>
+							<th><b>RATE CARD-CATEGORY-LEVEL</b></th>
+					</tr>
+					<tr>
+						<td><input type="number" placeholder="000000000000000" min="0" name="pcode"></td>
+						<td><input type="number" placeholder="00000" min="0" name="t_salary"></td>
+						<td><input type="text" placeholder="level" name="rcc_level"></td>
+					</tr>
+					<tr>
+							<th colspan="3"><b>POSITION DESCRIPTION</b></th>
+					</tr>
+					<tr>
+							<td colspan="3"><textarea id = "Position Requirements" name="posit_desc" rows="8" cols="100">Requirements and Responsibilities</textarea></td>
+					</tr>
+					<tr>
+							<th><b>RECOMMENDED HIRING</b></th>
+							<th colspan="2"><b>NOTES (Optional):</b></th>
+					</tr>
+					<tr>
+						<td rowspan="3"><input type="radio" name="rec_hire" value="Direct">Direct<br>
+						<input type="radio" name="rec_hire" value="Temp to Perm">Temp to Perm<br>
+					  <input type="radio" name="rec_hire" value="Contractor">Contractor</td>
+						<td colspan="2"><textarea id="Notes"  name="notes" rows="8" cols="65.9">Notes</textarea></td>
+					</tr>
+					<tr>
+						<tr></tr>
+						<td colspan="3"><button type="submit" value="Submit" >Submit Form</button><input type="reset" value="Reset" class="res"><button action="Logout.html" type="submit" value="Logout">Logout</button></td>
+					</tr>
+			</form>
+		</table>
+	</body>
+</html>
