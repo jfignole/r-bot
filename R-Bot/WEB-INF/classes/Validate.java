@@ -1,8 +1,10 @@
 import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-public class Validate
+public class Validate extends HttpServlet
 {
-  public static boolean checkUser(String user, String pass)
+  public static boolean checkUser(String user, String pass, String type)
   {
     boolean st =false;
     try {

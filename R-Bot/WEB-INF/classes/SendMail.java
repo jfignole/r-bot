@@ -1,11 +1,9 @@
 import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-public class MailApp extends HttpServlet {
+public class SendMail {
   public static void send(String to, String user, String sub, String msg ) {
     //create an instance of Properties Class
     Properties props = new Properties();

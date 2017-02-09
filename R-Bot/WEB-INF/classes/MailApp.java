@@ -10,9 +10,10 @@ public class MailApp extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String to = request.getParameter("to");
+        String user = request.getParameter("user");
         String subject = request.getParameter("subject");
         String message =  request.getParameter("message");
-        SendMail.send(to,subject, message);
+        SendMail.send(to, user, subject, message);
         out.println("Mail send successfully");
     }
 }

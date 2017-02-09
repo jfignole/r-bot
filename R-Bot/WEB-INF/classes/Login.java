@@ -3,16 +3,19 @@ import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Register extends HttpServlet {
+public class Login extends HttpServlet
+{
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException,IOException {
+        throws ServletException,IOException
+  {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
     String user=request.getParameter("uname");
     String pwd=request.getParameter("pass");
     String type=request.getParameter("type");
+
     if(Validate.checkUser(user, pwd, type))
     {
       if(type.equals("Employee") || type.equals("HR"))

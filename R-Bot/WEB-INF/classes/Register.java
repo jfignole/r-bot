@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import java.net.*;
 
 public class Register extends HttpServlet {
 
@@ -25,14 +26,22 @@ public class Register extends HttpServlet {
     try {
       Class.forName("com.mysql.jdbc.Driver");
       out.println("Loaded MySQL Drivers");
+      ServerSocket welcomeSocket = new ServerSocket(3307);
+      Socket connectionSocket = welcomeSocket.accept();
+      out.println("Connected to Socket");
       //creating connection with the database
-      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/r_bot?user=root&password=root");
-      if (con.isClosed()==true){
+      String dbName = "r-bot";
+      String dbInst = "r-bot";
+      String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/r_bot?user=cgi";
+      String dbUser = "cgi";
+      String dbPass = "";
+      Connection con = DriverManager.getConnection(jdbcUrl);
+      if (con.isClosed()==false){
       out.println("Connected to Database");
     }
     else
     out.println("Did Not Connect");
-      PreparedStatement ps=con.prepareStatement
+     PreparedStatement ps=con.prepareStatement
       ("insert into users values(?,?,?,?,?,?)");
 
       ps.setString(1,fn);
@@ -50,6 +59,9 @@ public class Register extends HttpServlet {
         out.flush();
         out.close();
       }
+      welcomeSocket.close();
+      out.println("Socket Closed");
+      out.close();
     }
       catch (Exception exc)
       {

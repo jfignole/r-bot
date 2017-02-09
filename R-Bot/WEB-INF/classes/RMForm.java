@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
-public class Register extends HttpServlet {
+public class RMForm extends HttpServlet {
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 
@@ -80,12 +80,13 @@ public class Register extends HttpServlet {
         out.flush();
         out.close();
       }
+      con.close();
     }
       catch (Exception exc)
       {
         exc.printStackTrace();
       }
-      con.close();
+
       out.flush();
       out.close();
     }
