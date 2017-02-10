@@ -32,10 +32,10 @@ public class Register extends HttpServlet {
       //creating connection with the database
       String dbName = "r-bot";
       String dbInst = "r-bot";
-      String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/r_bot?user=cgi";
-      String dbUser = "cgi";
-      String dbPass = "";
-      Connection con = DriverManager.getConnection(jdbcUrl);
+      String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/r_bot";
+      String dbUser = "root";
+      String dbPass = "cgi@1234";
+      Connection con = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
       if (con.isClosed()==false){
       out.println("Connected to Database");
     }

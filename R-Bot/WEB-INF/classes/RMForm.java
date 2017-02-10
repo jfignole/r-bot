@@ -40,7 +40,7 @@ public class RMForm extends HttpServlet {
       Class.forName("com.mysql.jdbc.Driver");
       out.println("Loaded MySQL Drivers");
       //creating connection with the database
-      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/r_bot?user=root&password=root");
+      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/r_bot?user=root&password=cgi@1234");
       if (con.isClosed()==true){
       out.println("Connected to Database");
     }
@@ -75,7 +75,8 @@ public class RMForm extends HttpServlet {
       if(i>0 && i <=20)
       {
         out.print("RM_Form Complete");
-        MailApp();
+        MailApp mail = new MailApp();
+        mail.doPost(request, response);
         con.close();
         out.flush();
         out.close();

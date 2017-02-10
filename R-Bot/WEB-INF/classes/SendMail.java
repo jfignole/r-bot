@@ -28,7 +28,7 @@ public class SendMail {
   try{
 
     //Create an instance of MimeMessage, it accepts MIME types and headers
-
+    Session session = Session.getInstance(props);
     MimeMessage message = new MimeMessage(session);
     message.setFrom(new InternetAddress(user));
     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));

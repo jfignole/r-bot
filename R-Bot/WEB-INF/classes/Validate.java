@@ -14,7 +14,7 @@ public class Validate extends HttpServlet
 
       //creating connection with the database
       Connection con=DriverManager.getConnection
-                      ("jdbc:mysql://localhost:3306/r_bot","root","root");
+                      ("jdbc:mysql://localhost:3306/r_bot","root","cgi@1234");
       PreparedStatement ps =con.prepareStatement
                           ("SELECT * FROM users where username=? and pass=?");
       ps.setString(1, user);
