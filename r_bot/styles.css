@@ -1,0 +1,45 @@
+h1 {
+  color:#E31937;
+  font-family: Arial;
+  font-size:400%;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1px;
+    text-align: left;
+}
+
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: left;
+  background-color: grey;
+}
+th.hr {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: left;
+  background-color: #7183a3;
+}
+button.cancelbtn {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+button.log {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5em;
+  padding-right: 5em;
+}

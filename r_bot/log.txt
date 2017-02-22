@@ -1,0 +1,167 @@
+//REGISTER FORM ORIGINAL
+
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+// Create connection
+$db = mysqli_connect('localhost', 'root', '', 'r_bot');
+// Check connection
+if ($db->connect_error) {
+    die('Connection failed: [' . $conn->connect_error . ']');
+}
+else
+    echo('Connection Succeeded');
+//check for form submit
+ if(isset($_POST['submit'])) {
+  // declare user inputs
+  $fname = $_POST['fName'];
+  $lname = $_POST['lName'];
+  $uname = $_POST['uName'];
+  $email = $_POST['uEmail'];
+  $pass = $_POST['pass'];
+  $utype = $_POST['uType'];
+// clean user inputs to prevent sql injections
+  $fname = mysqli_real_escape_string($db,$fname);
+  $lname = mysqli_real_escape_string($db,$lname);
+  $uname= mysqli_real_escape_string($db,$uname);
+  $email = mysqli_real_escape_string($db,$email);
+  $pass = mysqli_real_escape_string($db,$pass);
+  $salt = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+  $saltedPwd = $pass . $salt;
+  $hashedPwd = hash('sha256', $saltedPwd);
+  $utype = mysqli_real_escape_string($db,$utype);
+
+/*$sql = 'SELECT email FROM users WHERE email="$email"';
+$result = mysqli_query($db,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+if(mysqli_num_rows($result) == 1)
+{
+ echo 'Sorry...This email already exist..';
+}
+else
+{*/
+
+   $query = "INSERT INTO users (first_name, last_name, username, email, password, user_type, salt) VALUES('$fname', '$lname', '$uname', '$email', '$hashedPwd', '$utype', '$salt');";
+
+
+   if($db->query($query) === TRUE) {
+     echo "New record created successfully";
+  }else
+    echo $query;
+
+
+
+}
+//}
+ ?>
+
+//VENDORFORM TEST
+<?php
+session_start();
+$db=mysqli_connect('localhost:3306','root','', 'r_bot');
+if (mysqli_connect_errno())
+{
+  echo "Failed to connect to MySQL: " . mysqli_connect_errno();
+}
+
+$sql = mysqli_query($db, "SELECT * FROM rmemform");
+$all_property = array();
+echo "<body>
+<h1>CGI</h1>
+<table>
+<tr>";
+while($property = mysqli_fetch_field($sql)){
+  echo '<td>'.$property->name. '</td>';
+  array_push($all_property, $property->name);
+}
+echo "</tr>";
+while($result = mysqli_fetch_array($sql)) {
+  echo "<tr>";
+  foreach ($all_property as $item) {
+    echo '<td>' .$result[$item] . '</td>';
+  }
+  echo '</tr>';
+}
+echo "</table>";
+echo"
+        <tr>
+            <th><b>POSITION TITLE</b></th>
+            <th><b>SEAT LOCATION</b></th>
+            <th><b>DATE SUBMITTED TO CGI</b></th>
+        </tr>
+        <tr>
+            <td>".$result['position_title']."</td>
+            <td>".$result['seat_location']."</td>
+            <td>".$result['cgi_submit_dt']."</td>
+        </tr>
+        <tr>
+            <th><b># OF RESOURCES NEEDED</b></th>
+            <th><b>PROJECT START DATE</b></th>
+            <th><b>FIXED PRICE OR TM</b></th>
+        </tr>
+        <tr>
+          <td>".$result['num_resource_needed']."</td>
+          <td>".$result['proj_start_dt']."</td>
+          <td>".$result['tmfp']."</td>
+        </tr>
+        <tr>
+            <th><b>TYPE</b></th>
+            <th><b>ESTIMATED RESOURCE START DATE</b></th>
+            <th><b>ESTIMATED END DATE</b></th>
+        </tr>
+        <tr>
+            <td rowspan='4'>".$result['job_type']."</td>
+            <td>".$result['est_resource_start_dt']."</td>
+            <td>".$result['est_resource_end_dt']."</td>
+        </tr>
+        <tr>
+            <th><b>PROJECT/CLIENT</b></th>
+            <th><b>CONFIDENCE (0-100%)</b></th>
+        </tr>
+        <tr>
+            <td>".$result['proj_client']."</td>
+            <td>".$result['confidence']."%</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <th><b>HIRING MANAGER (PNC ONLY)</b></th>
+            <th><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
+            <th><b>CGI ENGAGMENT MANAGER</b></th>
+        </tr>
+        <tr>
+          <td>".$result['hiring_manager']."</td>
+          <td>".$result['senior_manager']."</td>
+          <td>".$result['cgi_engage_manager']."</td>
+        </tr>
+        <tr>
+            <th><b>PROJECT CODE #</b></th>
+            <th><b>TARGET SALARY</b></th>
+            <th><b>RATE CARD-CATEGORY-LEVEL</b></th>
+        </tr>
+        <tr>
+          <td>".$result['proj_code']."</td>
+          <td>".$result['target_salary']."</td>
+          <td>".$result['rate_crd_cat_lvl']."</td>
+        </tr>
+        <tr>
+            <th colspan='3'><b>POSITION DESCRIPTION</b></th>
+        </tr>
+        <tr>
+            <td colspan='3'><textarea id = 'Position Requirements' name='posit_desc' rows='8' cols='100'>".$result['position_desc']."</textarea></td>
+        </tr>
+        <tr>
+            <th><b>RECOMMENDED HIRING</b></th>
+            <th colspan='2'><b>NOTES (Optional):</b></th>
+        </tr>
+        <tr>
+          <td rowspan='3'>".$result['recommended_hiring']."</td>
+          <td colspan='2'><textarea id='Notes'  name='notes' rows='8' cols='65.9'>".$result['notes']."</textarea></td>
+        </tr>
+        <tr>
+          <tr></tr>";
+        echo "</table>";
+
+
+ ?>
