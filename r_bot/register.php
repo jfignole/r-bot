@@ -2,7 +2,7 @@
 include_once("config.php");
 ?>
 
-<?php if( !(isset( $_POST['register'] ) ) ) { ?>
+<?php if(!(isset($_POST['register']))) { ?>
 
 
 <!DOCTYPE html>
@@ -12,7 +12,8 @@ include_once("config.php");
       <title>Registration Form</title>
   </head>
     <body>
-      	<h1>CGI</h1>
+      <h1>CGI</h1>
+      <h2>R-Bot</h2>
         <table>
         <form method="post">
           <tr><th><b>First Name:</b></th><td><input type="text" maxlenth="30" required autofocus name="first_name"/></td></tr>
@@ -44,7 +45,7 @@ include_once("config.php");
 } else {
   $usr = new Users;
   $usr->storeFormValues( $_POST );
-
+  #checks that passwords match then registers user in the database
   if( $_POST['password'] == $_POST['conpassword'] ) {
     echo $usr->register($_POST);
   } else {

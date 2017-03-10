@@ -3,6 +3,10 @@
 class Users {
   public $username = null;
   public $password = null;
+  public $first_name = null;
+  public $last_name = null;
+  public $email = null;
+  public $user_type = null;
   public $salt = "i3YkuThgzKgeyzH00me33LleZtZaLOVr5pB7QgH7cGW3nHqivuWIo11tCpr6h6RQ";
 
   public function __construct($data = array()){
@@ -50,6 +54,7 @@ class Users {
       return $success;
     }catch (PDOException $e) {
       echo $e->getMessage();
+      
       return $success;
     }
   }
