@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?>
 <?php
@@ -109,14 +110,15 @@ include("../config.php");
 					</tr>
 					<tr><td colspan="3"><textarea id="Notes"  name="notes" rows="4" cols="100">Notes</textarea></tr>
 					<tr>
-						<td colspan="3"><button type="submit" name="submit" value="Submit" >Submit Form</button>
+						<td colspan="2"><button type="submit" name="submit" value="Submit" >Submit Form</button>
               <input type="reset" value="Reset" name="reset" class="res">
-              <input name="logout" type="submit" value="Logout" onclick="location.href='logout.php'">
+              <input name="logout" type="submit" value="Logout" onclick="location.href='../logout.php'">
 							</td>
-							</tr>
 						</form>
+            <td><a style="float: right"href='home.php'>Back</a></td>
+            </tr>
 		</table>
-<a href='home.php'>Back</a>
+
 	</body>
 </html>
 

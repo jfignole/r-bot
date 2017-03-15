@@ -54,7 +54,7 @@ class Users {
       return $success;
     }catch (PDOException $e) {
       echo $e->getMessage();
-      
+
       return $success;
     }
   }
@@ -74,7 +74,7 @@ class Users {
           $stmt->bindValue("password", hash("sha256", $this->password . $this->salt), PDO::PARAM_STR);
           $stmt->bindValue("user_type", $this->user_type, PDO::PARAM_STR);
           $stmt->execute();
-          return "Registration Successful <br/> <a href='index.php'>Login Now</a>";
+          return "Registration Successful <br/> <a href='index.php'>Login Now</a> &emsp; <a href='register.php'>Register Another User</a>";
         }catch(PDOException $e) {
           return $e->getMmessage();
         }

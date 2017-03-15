@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?>
 <!DOCTYPE html>
@@ -67,10 +68,11 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
         </tr>
         <tr>
           <td><button type="submit" name="submit" value="Submit">Submit Feedback</button></td>
-        </tr>
-       </form>
-
-    </table>
+        </td>
+      </form>
+      <td><a style="float: right"href='vendorCVList.php'>Back</a></td>
+      </tr>
+  </table>
   </body>
 </html>
 <?php
@@ -89,7 +91,4 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
   }
 }
 
-?>
-<?php
-echo "<a href='vendorCVList.php'>Back</a>";
 ?>

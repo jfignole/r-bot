@@ -18,6 +18,13 @@ h3 {
 p {
   font-size: 25px;
 }
+
+
+select:focus, textarea:focus, input:focus{
+  background-color: cyan;
+  border: 3px dashed black;
+}
+
 ul {
     list-style-type: none;
     margin: 0;

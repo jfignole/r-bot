@@ -2,7 +2,8 @@
 session_start();
 if(!isset($_SESSION['emp'])){#If session is not set, user isn't logged in.
                              #Redirect to Login Page
-      header("Location:../index.php");
+      header("Location:../logout.php");
+      exit();
    }
 ?><?php
 include("../config.php");
@@ -147,11 +148,11 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td colspan="3"><button type="submit" name="submit" value="Update" >Update Form</button>
               <input type="reset" value="Reset" name="reset" class="res">
               <input name="logout" type="submit" value="Logout" onclick="location.href='../logout.php'"></td>
-            </form>
-
-					</tr>
-		</table>
-    <a href="home.php">Back</a>
+            </td>
+          </form>
+          <td><a style="float: right"href='home.php'>Back</a></td>
+          </tr>
+  </table>
 	</body>
 </html>
 
@@ -198,7 +199,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
     $correct = false;
     return $e->getMessage();
   }
-  
+
 }
 
 ?>

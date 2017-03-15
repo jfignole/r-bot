@@ -1,7 +1,8 @@
 <?php
 session_start();
 if(!isset($_SESSION['hr'])){
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?><?php
 include("../config.php");
@@ -146,11 +147,12 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td colspan="3"><button type="submit" name="submit" value="Submit" >Submit Form</button>
               <input type="reset" value="Reset" name="reset" class="res">
               <input name="logout" type="submit" value="Logout" onclick="location.href='../logout.php'"></td>
-            </form>
+            </td>
+          </form>
+          <td><a style="float: right"href='hrHome.php'>Back</a></td>
+          </tr>
+  </table>
 
-					</tr>
-		</table>
-    <a href="hrHome.php">Back</a>
 	</body>
 </html>
 
@@ -192,7 +194,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
     ':comments' =>$_POST['comments']
   ));
   $correct = true;
-  echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a>";
+  echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
 }catch(PDOException $e) {
   $correct = false;
   echo $e->getMessage();

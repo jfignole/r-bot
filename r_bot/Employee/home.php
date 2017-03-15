@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?>
 
@@ -18,7 +19,6 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
 <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
 <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
 <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
-<li><a href="mailTest.php" style = "font-size:14px">Mail Test Page</a></li>
 <li><a href="../logout.php" style="font-size:14px">Logout?</a></li>
 <li><a>R-BOT</a></li>
 </ul>

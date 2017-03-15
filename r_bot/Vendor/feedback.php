@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?>
 <!DOCTYPE html>
@@ -61,4 +62,9 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
         </tr>
        <tr>
          <td colspan="3"><output name="feedback" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['feedback'], 100, "<br />\n");?></td>
-       </tr>
+       </td>
+     </tr>
+     <tr>
+     <td colspan = "3"><a style="float: right"href='feedbackList.php'>Back</a></td>
+     </tr>
+ </table>

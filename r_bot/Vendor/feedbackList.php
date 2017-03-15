@@ -3,7 +3,8 @@ session_start();#session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?><?php
 

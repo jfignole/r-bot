@@ -109,7 +109,8 @@ public function processForm() {
       ':rec_hire' =>$_POST['rec_hire'],
       ':notes' =>$_POST['notes']
     ));
-    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a><br/><a href='../email.php'>E-mail</a>";
+
+    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
   }catch(PDOException $e) {
     return $e->getMessage();
   }

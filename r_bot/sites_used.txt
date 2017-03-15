@@ -1,0 +1,37 @@
+CV Upload :
+http://www.codingcage.com/2014/12/file-upload-and-view-with-php-and-mysql.html
+https://davidwalsh.name/read-pdf-doc-file-php
+http://www.codingcage.com/2016/02/upload-insert-update-delete-image-using.html
+http://www.w3programmers.com/file-upload-and-download-with-php/
+http://techstream.org/Web-Development/PHP/Multiple-File-Upload-with-PHP-and-MySQL
+http://www.peachpit.com/articles/article.aspx?p=1967015&seqNum=3
+http://www.learningaboutelectronics.com/Articles/How-to-insert-files-into-a-MySQL-database-using-PHP.php
+
+Email :
+http://www.codingcage.com/2016/03/how-to-send-html-emails-in-php-with.html
+http://www.codingcage.com/2015/08/how-to-send-e-mail-using-phpmailer-and.html
+http://www.html-form-guide.com/email-form/php-form-to-email.html
+http://www.html-form-guide.com/email-form/html-email-form.html
+http://www.html-form-guide.com/contact-form/php-email-contact-form.html
+https://www.sitepoint.com/web-foundations/mime-types-complete-list/
+http://www.afterhoursprogramming.com/tutorial/PHP/Send-Emails/
+https://www.tutorialspoint.com/php/php_sending_emails.htm
+http://flowingmotion.jojordan.org/2012/04/26/how-to-set-up-email-with-wamp/
+http://php.net/manual/en/mail.configuration.php#ini.smtp
+https://www.w3schools.com/php/func_mail_mail.asp
+https://www.lifewire.com/how-to-send-email-from-a-php-script-1171195
+http://stackoverflow.com/questions/22396721/how-to-send-email-from-localhost-wamp-server-to-send-email-gmail-hotmail-or-so-f
+https://www.youtube.com/watch?v=2KmzkPWty7Y
+http://blog.techwheels.net/send-email-from-localhost-wamp-server-using-sendmail/
+
+
+Form Data:
+https://www.experts-exchange.com/questions/27643383/How-to-send-PDF-data-to-SQL-database-on-clicking-a-submit-button.html
+https://web.stanford.edu/dept/its/communications/webservices/wiki/index.php/How_to_retrieve,_sort,_and_display_information_from_a_database_using_the_Stanford_Web_Application_Toolkit
+
+Mysql and PDO:
+http://stackoverflow.com/questions/42513345/iterating-through-a-multidimensional-array-in-php-without-known-keys
+https://web.stanford.edu/dept/its/communications/webservices/wiki/index.php/How_to_retrieve,_sort,_and_display_information_from_a_database_using_the_Stanford_Web_Application_Toolkit
+
+Sessions and UserID:
+https://www.sitepoint.com/users-php-sessions-mysql/

@@ -3,7 +3,7 @@
   already, then the session is there, if not then its not there. If it is true
   then header redirects the user to the correct homepage depending on the user_type*/
  session_start();
- 
+
  include_once("config.php");
  if(isset($_SESSION['use']))
   {
@@ -71,19 +71,21 @@ else {
      if($usr->user_type == "Vendor") {
        $_SESSION['vend']='set';
       header("Location:Vendor/vendorHome.php");
+      exit();
     }
     else if($usr->user_type == "HR"){
       $_SESSION['hr']='set';
     header("Location:HR/hrHome.php");
+    exit();
 }
   else {
     $_SESSION['emp']='set';
     header("Location:Employee/home.php");
+    exit();
   }
 }
 else {
     echo "Incorrect Username, Password, or User Type. Please Try<a href='index.php'> Again</a>";
-
   }
 }
 ?>

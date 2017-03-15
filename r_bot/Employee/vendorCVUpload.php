@@ -1,4 +1,12 @@
 <?php
+session_start();#session_start();
+if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+?><?php
 include("../config.php");
 try{
 $conn=new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD); #DB Connection
@@ -36,7 +44,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error t
     </tr>
 </body>
 </html>
-  </body>
   <?php
 $i = $i + 1;
 }

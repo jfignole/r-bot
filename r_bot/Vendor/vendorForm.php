@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
-           header("Location:../index.php");
+           header("Location:../logout.php");
+           exit();
        }
 ?>
 <?php
@@ -223,12 +224,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   						<td colspan="3"><output id="Notes"  name="notes" rows="4" cols=""><?php echo wordwrap($rowt[0]['notes'], 120, "<br />\n");?></output></td>
   					</tr>
   					<tr>
-  						<tr></tr>
-              </form>
-
-  					</tr>
-  		</table>
-      <a href="rm_request_list.php">Back</a>
+            <td colspan="3"><a style="float: right"href='rm_request_list.php'>Back</a></td>
+            </tr>
+		</table>
    </body>
  </html>
 

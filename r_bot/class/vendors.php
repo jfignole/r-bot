@@ -46,7 +46,7 @@ class vendors {
           $stmt->bindValue("description", $this->description, PDO::PARAM_STR);
           $stmt->bindValue("so_number", $this->so_number, PDO::PARAM_STR);
           $stmt->execute();
-          return "Entry Successful <br/> <a href='vendorHome.php'>Home</a>";
+          return "Entry Successful <br/> <a href='vendorHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
         }catch(PDOException $e) {
           return $e->getMessage();
         }
