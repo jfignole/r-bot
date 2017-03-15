@@ -27,16 +27,7 @@ class vendors {
     //Store the parameters
     $this->__construct($params);
   }
-  public static function singleForm($id) {
-    $conn=new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT * FROM vendor WHERE V_ID = :id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam("id", $id, PDO::PARAM_INT);
-    $stmt->execute(array(':id' => $id));
-    $rowt = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $rowt;
-  }
+
   public function insertForm() {
     $correct = false;
     try {
@@ -61,9 +52,6 @@ class vendors {
         }
     }
 
-  public static function arrayIterator($rowt) {
-
-  }
   public static function fillForm($rowt) {
     $successt = false;
     try{

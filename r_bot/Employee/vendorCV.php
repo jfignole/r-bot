@@ -10,7 +10,7 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
  <html>
    <head>
       <link rel='stylesheet' href="../styles.css" type="text/css">
-      <title>Registration Form</title>
+      <title>Vendor CV</title>
    </head>
    <body>
      <h1>CGI</h1>
@@ -57,12 +57,37 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
          <tr>
              <td colspan="3"><output name="description" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['description'], 100, "<br />\n");?></td>
          </tr>
+         <?php if(!(isset($_POST['submit']))) {?>
+           <form method="POST" action="" >
+         <tr>
+           <th colspan="3"><b>Feedback<b></th>
+         </tr>
+        <tr>
+          <td colspan="3"><textarea name="feedback" rows="4" cols="100" value="feedback">Feedback</textarea></td>
+        </tr>
+        <tr>
+          <td><button type="submit" name="submit" value="Submit">Submit Feedback</button></td>
+        </tr>
+       </form>
 
     </table>
   </body>
 </html>
 <?php
-
+} else{
+  try{
+    $name = $rowt[0]['name'];
+    $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "UPDATE vendor SET feedback = :feedback WHERE name = '$name'";
+    $stmt = $con->prepare($sql);
+    $stmt->execute(array(
+      ':feedback' =>$_POST['feedback']));
+    echo "Feedback Added Successfully <br/> <a href='home.php'>Home</a>";
+  }catch(PDOException $e) {
+    echo $e->getMessage()."<br/> <a href='hrHome.php'>Home</a>";
+  }
+}
 
 ?>
 <?php

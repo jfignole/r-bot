@@ -66,15 +66,67 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
          <tr><td colspan="3"><input type='submit' name='submit' value='Submit' />
            <input type='button' name="cancel" value="Cancel" onclick="location.href='vendorHome.php'" /></td></tr>
       </form>
-    }
-      <form enctype="multipart/form-data"	action="../upload.php" method="post">
-  <tr><th class="VEND" colspan="3">Upload CV:</th></tr>
-  <tr><td colspan="2"><input type="hidden" name="MAX_FILE_SIZE" value="200000" /> <input
-	type="file" name="pdfFile" /></td><td><input type="submit" value="Upload CV" /></td></tr>
-</form>
+    <?php}
+    ?>
+      <form action="" method="post" enctype="multipart/form-data">
+        <tr><th class="VEND" colspan="3">Upload CV</th></tr>
+        <tr><td colspan="2"><input type="file" name="pdfFile" /></td>
+            <td><input type="submit" value="Upload CV" name="btn-upload" /></td>
+        </tr>
+      </form>
     </table>
+    <?php if(isset($_POST['btn-upload']))
+    {
+      $file = $_FILES['pdfFile']['name'];
+      $tmp_dir = $_FILES['pdfFile']['tmp_name'];
+      $fileSize = $_FILES['pdfFile']['size'];
+      if(empty($file)){
+        $errMSG = "Please Select a File";
+      }
+      else {
+        $folder="../uploads/"; //upload Directory
+        $filExt = strtolower(pathinfo($file,PATHINFO_EXTENSION)); //get file extension
+        $val_ext = array('pdf', 'doc', 'docx'); //valid file extensions
+        //rename uploading file
+	      //$newFile = rand(1000,1000000).".".$filExt;
+        //is this needed?
 
+        //allow valid file formats
+        if(in_array($filExt, $val_ext)){
+          //check File size '1MB'
+          if($fileSize < 1000000) {
+            move_uploaded_file($tmp_dir,$folder.$file);
+          }
+          else{
+            $errMSG = "Sorry, your file is too large.";
+          }
+        }
+        else{
+          $errMSG = "Sorry, only PDF, DOC & DOCX files are allowed.";
+        }
+      }
 
+      //if no error occured, continue...
+      if(!isset($errMSG))
+      {
+        $query = $conn->prepare('INSERT INTO files (fileName, fileActual, file_type,
+		file_size) VALUES (:fName, :fActual, :fType, :fSize)');
+        $query->bindParam(':fName',$file);
+        $query->bindParam(':fActual',$newFile);
+        $query->bindParam(':fType',$filExt);
+        $query->bindParam(':fSize',$fileSize);
+
+        if($query->execute())
+        {
+          $successMSG = "New CV successfully Added";
+          header("refresh:5;vendorHome.php");
+        }
+        else {
+          $errMSG = "error while uploading....";
+        }
+      }
+    }
+?>
       <h2>RM_Form</h2>
       <table>
         <tr colspan="3" class="HR">

@@ -198,9 +198,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
     $correct = false;
     return $e->getMessage();
   }
-  #$form = new rmClass;
-  #$form->storeFormValues($_POST);
-  #echo $form->updateEmForm($_POST);#updates RM_FORM in the database
+  
 }
 
 ?>

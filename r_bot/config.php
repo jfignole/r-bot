@@ -13,5 +13,4 @@
 	include_once(CLS_PATH . "/user.php" );
 	include_once(CLS_PATH . "/vendors.php");
 	include_once(CLS_PATH . "/rmClass.php");
-	include_once(CLS_PATH . "/files.php");
 ?>

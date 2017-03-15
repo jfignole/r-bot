@@ -70,50 +70,7 @@ public static function fillForm($rowt) {
   }
 }
 
-public function updateForm() {
-  $correct = false;
-  try {
-    $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "UPDATE rmemform SET position_title = :ptitle, seat_location = :sloc, cgi_submit_dt = :dsub,
-      num_resource_need = :numres, proj_start_dt = :pstart, tmfp = :TMFP, job_type = :type, est_resource_start_dt = :rsdate,
-      est_resource_end_dt = :rendate, proj_client = :proj_client, confidence = :conf_perc, hiring_manager = :hir_manag, senior_manager = :sen_manag,
-      cgi_engage_manager = :engag_manag, proj_code = :pcode, target_salary = :t_salary, rate_crd_cat_lvl = :rcc_level, position_desc = :posit_desc,
-      recommended_hiring = :rec_hire, notes = :notes, so_number = :soNum, comments = :comments";
 
-
-    $stmt = $con->prepare($sql);
-    $stmt->execute(array(
-      ':ptitle' =>$_POST['ptitle'],
-      ':sloc' =>$_POST['sloc'],
-      ':dsub' =>date("Y-m-d", strtotime($_POST['dsub'])),
-      ':numres' =>$_POST['numres'],
-      ':pstart' =>date("Y-m-d", strtotime($_POST['pstart'])),
-      ':TMFP' =>$_POST['TMFP'],
-      ':type' =>$_POST['type'],
-      ':rsdate' =>date("Y-m-d", strtotime($_POST['rsdate'])),
-      ':rendate' =>date("Y-m-d", strtotime($_POST['rendate'])),
-      ':proj_client' =>$_POST['proj_client'],
-      ':conf_perc' =>$_POST['conf_perc'],
-      ':hir_manag' =>$_POST['hir_manag'],
-      ':sen_manag' =>$_POST['sen_manag'],
-      ':engag_manag' =>$_POST['engag_manag'],
-      ':pcode' =>$_POST['pcode'],
-      ':t_salary' =>$_POST['t_salary'],
-      ':rcc_level' =>$_POST['rcc_level'],
-      ':posit_desc' =>$_POST['posit_desc'],
-      ':rec_hire' =>$_POST['rec_hire'],
-      ':notes' =>$_POST['notes'],
-      ':soNum' =>$_POST['soNum'],
-      ':comments' =>$_POST['comments']
-    ));
-    $correct = true;
-    return "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a>";
-  }catch(PDOException $e) {
-    $correct = false;
-    return $e->getMessage();
-  }
-}
 public function processForm() {
   $correct = false;
   try {
@@ -152,7 +109,7 @@ public function processForm() {
       ':rec_hire' =>$_POST['rec_hire'],
       ':notes' =>$_POST['notes']
     ));
-    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a>";
+    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a><br/><a href='../email.php'>E-mail</a>";
   }catch(PDOException $e) {
     return $e->getMessage();
   }

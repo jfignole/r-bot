@@ -195,11 +195,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
   echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a>";
 }catch(PDOException $e) {
   $correct = false;
-  return $e->getMessage();
+  echo $e->getMessage();
+  }
 }
-  #$form = new rmClass;
-  #$form->storeFormValues($_POST);
-  #echo $form->updateForm($_POST);#updates RM_FORM in the database
-}
-#}
 ?>

@@ -15,6 +15,7 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
 </head>
 <ul>
 <li><a href="rm_request_list.php" style ="font-size:14px">Vendor Form</a></li>
+<li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
 <li><a href="../logout.php" style="font-size:14px">Logout?</a></li>
 <li><a>R-BOT</a></li>
 </ul>
