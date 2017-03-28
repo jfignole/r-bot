@@ -1,13 +1,14 @@
 <?php
 session_start();
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
            header("Location:../logout.php");
            exit();
        }
-?>
-<?php
+
 include("../config.php");
 $id = $_GET['id']; #gets id from previous page and queries the database to get
                    #information to fill in this particular RM_FORM
@@ -18,27 +19,26 @@ $stmt = $conn->prepare($sql);
 $stmt->execute(); #builds and runs query
 $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
                                     #names instead of indexes
-
-?>
-<?php if( !(isset( $_POST['submit'] ) ) ) { ?>
+ if( !(isset( $_POST['submit'] ) ) ) { ?>
 
  <!DOCTYPE html>
  <html>
    <head>
-      <link rel='stylesheet' href="../styles.css" type="text/css">
+      <link rel='stylesheet' href='../styles.css' type='text/css'>
       <title>Registration Form</title>
    </head>
    <body>
      <h1>CGI</h1>
      <h2>R-Bot</h2>
+  
       <h3>Application</h3>
        <table>
        <form method='post'>
-         <tr><th colspan="3" class="VEND"><b>Job SO Number</b></th></tr>
+         <tr><th colspan="3" class='VEND'><b>Job SO Number</b></th></tr>
          <tr><td colspan="3"><input type='text' maxlength='30' required name='so_number'value='<?php echo $rowt[0]['so_number']?>'/></td></tr>
-         <tr><th class="VEND"><b>Name</b></th>
-             <th class="VEND"><b>Phone Number</b></th>
-             <th class="VEND"><b>Best Time to Call<b></th>
+         <tr><th class='VEND'><b>Name</b></th>
+             <th class='VEND'><b>Phone Number</b></th>
+             <th class='VEND'><b>Best Time to Call<b></th>
          </tr>
          <tr></tr>
          <tr><td><input type='text' maxlength="30" required name='name'/></td>
@@ -46,9 +46,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
              <td><input type='text' maxlength="30" required name='bc_time'/></td></tr>
          <tr></tr>
          <tr>
-             <th class="VEND"><b>Visa Status<b></th>
-             <th class="VEND"><b>IT Experience<b></th>
-             <th class="VEND"><b>Relevant Experience<b></th>
+             <th class='VEND'><b>Visa Status<b></th>
+             <th class='VEND'><b>IT Experience<b></th>
+             <th class='VEND'><b>Relevant Experience<b></th>
          </tr>
          <tr></tr>
          <tr><td><input type='text' maxlength="30" required name='v_status'/></td>
@@ -57,7 +57,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
          </tr>
          <tr></tr>
          <tr>
-             <th class="VEND" colspan="3"><b>Description<b></th>
+             <th class='VEND' colspan="3"><b>Description<b></th>
          </tr>
          <tr></tr>
          <tr>
@@ -67,15 +67,16 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
          <tr><td colspan="3"><input type='submit' name='submit' value='Submit' />
            <input type='button' name="cancel" value="Cancel" onclick="location.href='vendorHome.php'" /></td></tr>
       </form>
-    <?php}
-    ?>
+
       <form action="" method="post" enctype="multipart/form-data">
-        <tr><th class="VEND" colspan="3">Upload CV</th></tr>
-        <tr><td colspan="2"><input type="file" name="pdfFile" /></td>
+        <tr><th class='VEND' colspan="3">Upload CV</th></tr>
+        <tr><td><input type="file" name="pdfFile" /></td>
             <td><input type="submit" value="Upload CV" name="btn-upload" /></td>
+            <td><a style="float: right"href='rm_request_list.php'>Back</a> <a href='../logout.php'>Logout</a></td>
         </tr>
       </form>
     </table>
+
     <?php if(isset($_POST['btn-upload']))
     {
       $file = $_FILES['pdfFile']['name'];
@@ -96,8 +97,14 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
         if(in_array($filExt, $val_ext)){
           //check File size '1MB'
           if($fileSize < 1000000) {
-            move_uploaded_file($tmp_dir,$folder.$file);
+            try{
+              if(!move_uploaded_file($tmp_dir,$folder.$file)){
+                throw new Exception('Could not move file');
+              }
+          }catch(Exception $e) {
+             echo'File did not upload: '  .$_FILES["pdfFile"]["error"];
           }
+        }
           else{
             $errMSG = "Sorry, your file is too large.";
           }
@@ -119,8 +126,8 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
 
         if($query->execute())
         {
-          $successMSG = "New CV successfully Added";
-          header("refresh:5;vendorHome.php");
+          $successMSG = "New CV successfully Added <a href='../email.php'.>E-mail</a>";
+          echo $successMSG;
         }
         else {
           $errMSG = "error while uploading....";
@@ -128,30 +135,30 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
       }
     }
 ?>
-      <h2>RM_Form</h2>
+      <h3>RM_Form</h3>
       <table>
-        <tr colspan="3" class="HR">
-          <th colspan="3" class="HR"><b>ID NUMBER:</b></th>
+        <tr colspan="3" class='HR'>
+          <th colspan="3" class='HR'><b>ID NUMBER:</b></th>
         </tr>
         <tr>
-          <th colspan="3"><output type="text" name="idnum"><?php echo $rowt[0]['RM_ID']?></output></td>
+          <th colspan="3" class='HR'><output type="text" name="idnum"><?php echo $rowt[0]['RM_ID']?></output></th>
         </tr>
-          <tr colspan="3" class="HR">
-            <th class="HR" colspan="3"><b>SO NUMBER:</b></th>
+          <tr colspan="3" class='HR'>
+            <th class='HR' colspan="3"><b>SO NUMBER:</b></th>
           </tr>
           <tr>
-            <th class="HR" colspan = "3"><output type="text" name="so_number"><?php echo $rowt[0]['so_number']?></output></th>
+            <th class='HR' colspan = "3"><output type="text" name="so_number"><?php echo $rowt[0]['so_number']?></output></th>
 
           </tr>
           <tr>
-            <th class="HR" colspan="3" class="HR"><b>COMMENTS: </b></th>
+            <th class='HR' colspan="3" class='HR'><b>COMMENTS: </b></th>
           </tr>
           <td colspan="3"><output name="comments" rows="4" cols="100"><?php echo $rowt[0]['comments']?></output></td>
         </tr>
   			<tr>
-  							<th class="HR"><b>POSITION TITLE</b></th>
-  							<th class="HR"><b>SEAT LOCATION</b></th>
-  							<th class="HR"><b>DATE SUBMITTED TO CGI</b></th>
+  							<th class='HR'><b>POSITION TITLE</b></th>
+  							<th class='HR'><b>SEAT LOCATION</b></th>
+  							<th class='HR'><b>DATE SUBMITTED TO CGI</b></th>
   					</tr>
   					<tr>
   							<td><output type="text" name="ptitle"><?php echo $rowt[0]['position_title']?></output></td>
@@ -159,9 +166,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   							<td><output type="date"  name="dsub"><?php echo $rowt[0]['cgi_submit_dt']?></output></td>
   					</tr>
   					<tr>
-  							<th class="HR"><b># OF RESOURCES NEEDED</b></th>
-  							<th class="HR"><b>PROJECT START DATE</b></th>
-  							<th class="HR"><b>FIXED PRICE OR TM</b></th>
+  							<th class='HR'><b># OF RESOURCES NEEDED</b></th>
+  							<th class='HR'><b>PROJECT START DATE</b></th>
+  							<th class='HR'><b>FIXED PRICE OR TM</b></th>
   					</tr>
   					<tr>
   						<td><output type="text"  min="0" name="numres"><?php echo $rowt[0]['num_resource_need']?></output></td>
@@ -169,9 +176,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   						<td><output name="TMFP" ><?php echo $rowt[0]['tmfp']?></output></td>
   					</tr>
   					<tr>
-  							<th class="HR"><b>TYPE</b></th>
-  							<th class="HR"><b>ESTIMATED RESOURCE START DATE</b></th>
-  							<th class="HR"><b>ESTIMATED END DATE</b></th>
+  							<th class='HR'><b>TYPE</b></th>
+  							<th class='HR'><b>ESTIMATED RESOURCE START DATE</b></th>
+  							<th class='HR'><b>ESTIMATED END DATE</b></th>
   					</tr>
   					<tr>
   							<td><output name="type" ><?php echo $rowt[0]['job_type']?></output></td>
@@ -179,21 +186,21 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   							<td><output type="date"  name="rendate"><?php echo $rowt[0]['est_resource_end_dt']?></output></td>
   					</tr>
   					<tr>
-                <th class="HR"><b>RECOMMENDED HIRING</b></th>
-  							<th class="HR"><b>PROJECT/CLIENT</b></th>
-  							<th class="HR"><b>CONFIDENCE (0-100%)</b></th>
+                <th class='HR'><b>RECOMMENDED HIRING</b></th>
+  							<th class='HR'><b>PROJECT/CLIENT</b></th>
+  							<th class='HR'><b>CONFIDENCE (0-100%)</b></th>
   					</tr>
   					<tr>
-              <td><select name="rec_hire" ><?php echo $rowt[0]['recommended_hiring']?></output></td>
+              <td><output name="rec_hire" ><?php echo $rowt[0]['recommended_hiring']?></output></td>
   							<td><output type="text" name="proj_client" ><?php echo $rowt[0]['proj_client']?></output></td>
   							<td><output type="text" name="conf_perc"  min="0" max="100"><?php echo $rowt[0]['confidence']?></output></td>
   					</tr>
   					<tr>
   					</tr>
   					<tr>
-  							<th class="HR"><b>HIRING MANAGER (PNC ONLY)</b></th>
-  							<th class="HR"><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
-  							<th class="HR"><b>CGI ENGAGMENT MANAGER</b></th>
+  							<th class='HR'><b>HIRING MANAGER (PNC ONLY)</b></th>
+  							<th class='HR'><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
+  							<th class='HR'><b>CGI ENGAGMENT MANAGER</b></th>
   					</tr>
   					<tr>
   						<td><output type="text"  name="hir_manag"><?php echo $rowt[0]['hiring_manager']?></output></td>
@@ -201,9 +208,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   						<td><output type="text"  name="engag_manag"><?php echo $rowt[0]['cgi_engage_manager']?></output></td>
   					</tr>
   					<tr>
-  							<th class="HR"><b>PROJECT CODE #</b></th>
-  							<th class="HR"><b>TARGET SALARY</b></th>
-  							<th class="HR"><b>RATE CARD-CATEGORY-LEVEL</b></th>
+  							<th class='HR'><b>PROJECT CODE #</b></th>
+  							<th class='HR'><b>TARGET SALARY</b></th>
+  							<th class='HR'><b>RATE CARD-CATEGORY-LEVEL</b></th>
   					</tr>
   					<tr>
   						<td><output type="text"  min="0" name="pcode"><?php echo $rowt[0]['proj_code']?></output></td>
@@ -211,22 +218,23 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   						<td><output type="text"  name="rcc_level"><?php echo $rowt[0]['rate_crd_cat_lvl']?></output></td>
   					</tr>
   					<tr>
-  							<th class="HR" colspan="3"><b>POSITION DESCRIPTION</b></th>
+  							<th class='HR' colspan="3"><b>POSITION DESCRIPTION</b></th>
   					</tr>
   					<tr>
   							<td colspan="3"><output id = "Position Requirements" name="posit_desc" rows="20" cols=""><?php echo wordwrap($rowt[0]['position_desc'], 120, "<br />\n");?></output></td>
   					</tr>
   					<tr>
 
-  							<th class="HR" colspan="3"><b>NOTES (Optional):</b></th>
+  							<th class='HR' colspan="3"><b>NOTES (Optional):</b></th>
   					</tr>
   					<tr>
   						<td colspan="3"><output id="Notes"  name="notes" rows="4" cols=""><?php echo wordwrap($rowt[0]['notes'], 120, "<br />\n");?></output></td>
   					</tr>
   					<tr>
-            <td colspan="3"><a style="float: right"href='rm_request_list.php'>Back</a></td>
+            <td colspan="3"><a style="float: right"href='rm_request_list.php'>Back</a> <a href='../logout.php'>Logout</a></td>
             </tr>
 		</table>
+
    </body>
  </html>
 

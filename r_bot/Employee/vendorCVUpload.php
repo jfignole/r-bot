@@ -6,7 +6,6 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
            header("Location:../logout.php");
            exit();
        }
-?><?php
 include("../config.php");
 try{
 $conn=new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD); #DB Connection
@@ -23,7 +22,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error t
  <!DOCTYPE html>
  <html>
    <head>
-     <link rel="stylesheet" href="../styles.css">
+     <link rel='stylesheet' href='../styles.css' type='text/css'>
      <title>Uploaded CVs</title>
    </head>
    <body>
@@ -31,7 +30,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error t
      <h2>R-Bot</h2>
      <table>
        <tr>
-         <th>File Name</th>
+         <th class='EMP'>File Name</th>
        </tr>
      <?php
  foreach($rowt as $test) {

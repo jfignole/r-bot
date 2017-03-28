@@ -1,5 +1,4 @@
 <?php
-
 class rmClass {
   public $ptitle = null;
   public $sloc = null;
@@ -110,7 +109,7 @@ public function processForm() {
       ':notes' =>$_POST['notes']
     ));
 
-    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
+    return "Form Submitted Successfully <br/> <a href='home.php'>Home</a><br/><a href='../email.php'.>E-mail</a><br/><a href='../logout.php'>Logout</a>";
   }catch(PDOException $e) {
     return $e->getMessage();
   }

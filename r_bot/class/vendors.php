@@ -1,5 +1,4 @@
 <?php
-
 class vendors {
   public $name = null;
   public $p_num = null;
@@ -46,7 +45,7 @@ class vendors {
           $stmt->bindValue("description", $this->description, PDO::PARAM_STR);
           $stmt->bindValue("so_number", $this->so_number, PDO::PARAM_STR);
           $stmt->execute();
-          return "Entry Successful <br/> <a href='vendorHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
+          return "Entry Successful <br/> <a href='vendorHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a></br><a href='../logout.php'>Logout</a>";
         }catch(PDOException $e) {
           return $e->getMessage();
         }

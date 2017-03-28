@@ -10,7 +10,7 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
 <!DOCTYPE html>
  <html>
    <head>
-      <link rel='stylesheet' href="../styles.css" type="text/css">
+      <link rel='stylesheet' href='../styles.css' type='text/css'>
       <title>CV Feedback</title>
     </head>
     <body>
@@ -65,6 +65,6 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
        </td>
      </tr>
      <tr>
-     <td colspan = "3"><a style="float: right"href='feedbackList.php'>Back</a></td>
+     <td colspan = "3"><a style="float: right"href='feedbackList.php'>Back</a><a href='../logout.php'>Logout</a></td>
      </tr>
  </table>

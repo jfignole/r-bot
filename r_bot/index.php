@@ -5,21 +5,7 @@
  session_start();
 
  include_once("config.php");
- if(isset($_SESSION['use']))
-  {
-    if($usr->user_type == "Vendor") {
-   header("Location:Vendor/vendorHome.php");
- }
- else if($usr->user_type == "HR"){
- header("Location:HR/hrHome.php");
-}
-else {
- header("Location:Employee/home.php");
-}
-}
-
- ?>
- <?php if ( !(isset($_POST['login'] ) ) ) { ?>
+ if ( !(isset($_POST['login'] ) ) ) { ?>
 
 <!DOCTYPE html>
 <html>
@@ -67,7 +53,6 @@ else {
   #passes user through the user class for validation checks user type
   if( $usr->userLogin() ) {
 
-    echo "Welcome";
      if($usr->user_type == "Vendor") {
        $_SESSION['vend']='set';
       header("Location:Vendor/vendorHome.php");

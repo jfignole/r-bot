@@ -4,7 +4,6 @@ if(!isset($_SESSION['hr'])){
            header("Location:../logout.php");
            exit();
        }
-?><?php
 include("../config.php");
 $id = $_GET['id'];#Gets id from previous page and queries the database to get
                    #information to fill in this particular RM_FORM
@@ -15,13 +14,12 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();#Builds and runs query
 $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
                                           #names instead of indexes
-?>
-<?php if( !(isset( $_POST['submit'] ) ) ) { ?>
+ if(!(isset($_POST['submit']))) { ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="../styles.css">
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
 	<title>
 	GPO RM Form IIB Onshore
 	</title>
@@ -31,28 +29,28 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
     <h2>R-Bot</h2>
 		<table>
 			<form method="POST" action="" >
-        <tr colspan="3" class="HR">
-          <th colspan="3" class="HR"><b>ID NUMBER:</b></th>
+        <tr colspan="3" class='HR'>
+          <th colspan="3" class='HR'><b>ID NUMBER:</b></th>
         </tr>
         <tr>
           <th colspan="3"><input type="text" name="idnum" value="<?php echo $id ?>"></td>
         </tr>
-        <tr colspan="3" class="HR">
-          <th class="HR" colspan="3"><b>SO NUMBER:</b></th>
+        <tr colspan="3" class='HR'>
+          <th class='HR' colspan="3"><b>SO NUMBER:</b></th>
         </tr>
         <tr>
-          <th class="HR" colspan = "3"><input type="text" placeholder"SO Number" name="soNum"></th>
+          <th class='HR' colspan = "3"><input type="text" placeholder"SO Number" name="soNum"></th>
 
         </tr>
         <tr>
-          <th class="HR" colspan="3" class="HR"><b>COMMENTS: </b></th>
+          <th class='HR' colspan="3" class='HR'><b>COMMENTS: </b></th>
         </tr>
         <td colspan="3"><textarea name="comments" rows="4" cols="100">Comments</textarea></td>
       </tr>
 			<tr>
-							<th class="HR"><b>POSITION TITLE</b></th>
-							<th class="HR"><b>SEAT LOCATION</b></th>
-							<th class="HR"><b>DATE SUBMITTED TO CGI</b></th>
+							<th class='HR'><b>POSITION TITLE</b></th>
+							<th class='HR'><b>SEAT LOCATION</b></th>
+							<th class='HR'><b>DATE SUBMITTED TO CGI</b></th>
 					</tr>
 					<tr>
 							<td><input type="text" value="<?php echo $rowt[0]['position_title']?>" name="ptitle"></output></td>
@@ -60,9 +58,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 							<td><input type="date" value="<?php echo $rowt[0]['cgi_submit_dt']?>" name="dsub"></td>
 					</tr>
 					<tr>
-							<th class="HR"><b># OF RESOURCES NEEDED</b></th>
-							<th class="HR"><b>PROJECT START DATE</b></th>
-							<th class="HR"><b>FIXED PRICE OR TM</b></th>
+							<th class='HR'><b># OF RESOURCES NEEDED</b></th>
+							<th class='HR'><b>PROJECT START DATE</b></th>
+							<th class='HR'><b>FIXED PRICE OR TM</b></th>
 					</tr>
 					<tr>
 						<td><input type="text" value="<?php echo $rowt[0]['num_resource_need']?>" min="0" name="numres"></td>
@@ -74,9 +72,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						</td>
 					</tr>
 					<tr>
-							<th class="HR"><b>TYPE</b></th>
-							<th class="HR"><b>ESTIMATED RESOURCE START DATE</b></th>
-							<th class="HR"><b>ESTIMATED END DATE</b></th>
+							<th class='HR'><b>TYPE</b></th>
+							<th class='HR'><b>ESTIMATED RESOURCE START DATE</b></th>
+							<th class='HR'><b>ESTIMATED END DATE</b></th>
 					</tr>
 					<tr>
 							<td><select name="type">
@@ -93,9 +91,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 							<td><input type="date" value="<?php echo $rowt[0]['est_resource_end_dt']?>" name="rendate"></td>
 					</tr>
 					<tr>
-              <th class="HR"><b>RECOMMENDED HIRING</b></th>
-							<th class="HR"><b>PROJECT/CLIENT</b></th>
-							<th class="HR"><b>CONFIDENCE (0-100%)</b></th>
+              <th class='HR'><b>RECOMMENDED HIRING</b></th>
+							<th class='HR'><b>PROJECT/CLIENT</b></th>
+							<th class='HR'><b>CONFIDENCE (0-100%)</b></th>
 					</tr>
 					<tr>
             <td><select name="rec_hire">
@@ -110,9 +108,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 					<tr>
 					</tr>
 					<tr>
-							<th class="HR"><b>HIRING MANAGER (PNC ONLY)</b></th>
-							<th class="HR"><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
-							<th class="HR"><b>CGI ENGAGMENT MANAGER</b></th>
+							<th class='HR'><b>HIRING MANAGER (PNC ONLY)</b></th>
+							<th class='HR'><b>CIO/SENIOR MANAGER (PNC ONLY)</b></th>
+							<th class='HR'><b>CGI ENGAGMENT MANAGER</b></th>
 					</tr>
 					<tr>
 						<td><input type="text" value="<?php echo $rowt[0]['hiring_manager']?>" name="hir_manag"></td>
@@ -120,9 +118,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td><input type="text" value="<?php echo $rowt[0]['cgi_engage_manager']?>" name="engag_manag"></td>
 					</tr>
 					<tr>
-							<th class="HR"><b>PROJECT CODE #</b></th>
-							<th class="HR"><b>TARGET SALARY</b></th>
-							<th class="HR"><b>RATE CARD-CATEGORY-LEVEL</b></th>
+							<th class='HR'><b>PROJECT CODE #</b></th>
+							<th class='HR'><b>TARGET SALARY</b></th>
+							<th class='HR'><b>RATE CARD-CATEGORY-LEVEL</b></th>
 					</tr>
 					<tr>
 						<td><input type="text" value="<?php echo $rowt[0]['proj_code']?>" min="0" name="pcode"></td>
@@ -130,26 +128,26 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td><input type="text" value="<?php echo $rowt[0]['rate_crd_cat_lvl']?>" name="rcc_level"></td>
 					</tr>
 					<tr>
-							<th class="HR" colspan="3"><b>POSITION DESCRIPTION</b></th>
+							<th class='HR' colspan="3"><b>POSITION DESCRIPTION</b></th>
 					</tr>
 					<tr>
 							<td colspan="3"><textarea id = "Position Requirements" name="posit_desc" rows="8" cols="100"><?php echo $rowt[0]['position_desc']?></textarea></td>
 					</tr>
 					<tr>
 
-							<th class="HR" colspan="3"><b>NOTES (Optional):</b></th>
+							<th class='HR' colspan="3"><b>NOTES (Optional):</b></th>
 					</tr>
 					<tr>
 						<td colspan="3"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea></td>
 					</tr>
 					<tr>
 						<tr></tr>
-						<td colspan="3"><button type="submit" name="submit" value="Submit" >Submit Form</button>
+						<td colspan="2"><button type="submit" name="submit" value="Submit" >Submit Form</button>
               <input type="reset" value="Reset" name="reset" class="res">
               <input name="logout" type="submit" value="Logout" onclick="location.href='../logout.php'"></td>
             </td>
           </form>
-          <td><a style="float: right"href='hrHome.php'>Back</a></td>
+          <td><a style="float: right"href='hrHome.php'>Back</a><a href='../logout.php'>Logout</a></td>
           </tr>
   </table>
 
@@ -158,6 +156,9 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 
 <?php
 } else {
+  if(empty($_POST['soNum'])){
+    echo "SO_Number required. No changes applied. <a href=\"javascript:history.go(-1)\">GO BACK</a>";
+  }else {
   try{
   $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
   $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -194,10 +195,11 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
     ':comments' =>$_POST['comments']
   ));
   $correct = true;
-  echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a>";
+  echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a><br/><a href='../logout.php'>Logout</a>";
 }catch(PDOException $e) {
   $correct = false;
   echo $e->getMessage();
   }
+}
 }
 ?>

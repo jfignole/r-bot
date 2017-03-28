@@ -19,10 +19,12 @@ p {
   font-size: 25px;
 }
 
-
+textarea {
+  resize: none;
+}
 select:focus, textarea:focus, input:focus{
   background-color: cyan;
-  border: 3px dashed black;
+  border: 3px solid black;
 }
 
 ul {
@@ -73,19 +75,27 @@ th {
   text-align: left;
   background-color: #A5ACB0;
 }
-th.HR {
+.HR {
   border: 3px solid black;
   border-collapse: collapse;
   padding: 5px;
   text-align: left;
   background-color: #A1C4D0;
 }
-th.VEND {
+.VEND {
   border: 3px solid black;
   border-collapse: collapse;
   padding: 5px;
   text-align: left;
   background-color: #F2A200;
+}
+
+.EMP {
+  border: 3px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+  text-align: left;
+  background-color: #FF6A00;
 }
 button.cancelbtn {
   padding-left: 2em;

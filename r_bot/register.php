@@ -1,9 +1,6 @@
 <?php
 include_once("config.php");
-?>
-
-<?php if(!(isset($_POST['register']))) { ?>
-
+if(!(isset($_POST['register']))) { ?>
 
 <!DOCTYPE html>
 <html>
@@ -47,9 +44,16 @@ include_once("config.php");
   $usr->storeFormValues( $_POST );
   #checks that passwords match then registers user in the database
   if( $_POST['password'] == $_POST['conpassword'] ) {
-    echo $usr->register($_POST);
+    $email = $_POST["email"];
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $emailErr = "Invalid email format";
+    echo $emailErr . "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
   } else {
-    echo "Password and Confirm password do not match";
+    echo $usr->register($_POST);
+  }}else {
+    echo "Password and Confirm password do not match. <a href=\"javascript:history.go(-1)\">GO BACK</a>";
   }
+
+
 }
 ?>

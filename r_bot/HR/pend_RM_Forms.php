@@ -6,15 +6,13 @@ if(!isset($_SESSION['hr'])) #If session is not set, user isn't logged in.
            header("Location:../logout.php");
            exit();
        }
-?>
-<?php
 include("../config.php");
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="../styles.css">
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
 	<title>
 	Pending RM_Forms
 	</title>
@@ -22,7 +20,7 @@ include("../config.php");
 	<body>
     <h1>CGI</h1>
     <h2>R-Bot</h2>
-    <p><b><u>Pending RM Forms</b></u></p>
+    <b><u>Pending RM Forms</b></u><br/>
   </body>
 </html>
 <?php
@@ -39,6 +37,6 @@ foreach($rowt as $test) {
 	echo "<a href='HR_RM_Form.php?id=$id'>".$pt.": ".date('M j Y', strtotime($nm))."</a><br/>";#passes id of clicked link
 	}
 }
-echo "<a href='hrHome.php'>Back</a>";
+echo "<a href='hrHome.php'>Back</a> <a href='../logout.php'>Logout</a>";
 
 ?>

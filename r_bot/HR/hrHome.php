@@ -5,7 +5,7 @@ if(!isset($_SESSION['hr']))#If session is not set, user isn't logged in.
            header("Location:../logout.php");
            exit();
        } ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,15 +13,14 @@ if(!isset($_SESSION['hr']))#If session is not set, user isn't logged in.
 <link rel="stylesheet" href="../styles.css" type="text/css" />
 </head>
 <ul>
-<li><a href="pend_RM_Forms.php" style ="font-size:14px">Pending RM Form</a></li>
-<li><a href="../logout.php" style="font-size:14px">Logout?</a></li>
 <li><a>R-BOT</a></li>
+<li><a href="pend_RM_Forms.php" style ="font-size:14px">Pending RM Form</a></li>
+<li><a href="../logout.php" style="font-size:14px">Logout</a></li>
 </ul>
 <h1>CGI</h1>
 <h2>R-Bot</h2>
 <body>
-<?php echo "Welcome to the HR Page!"?>
-<br/>
+Welcome to the HR Page!
 
 </body>
 </html>

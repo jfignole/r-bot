@@ -6,14 +6,12 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
            header("Location:../logout.php");
            exit();
        }
-?><?php
-
 include("../config.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="../styles.css">
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
 	<title>
 	Vendor CV List
 	</title>
@@ -21,7 +19,7 @@ include("../config.php");
 	<body>
     <h1>CGI</h1>
     <h2>R-Bot</h2>
-    <p><b><u>Feedback</b></u></p>
+    <b><u>Feedback</b></u>
   </body>
 </html>
 <?php
@@ -40,5 +38,5 @@ foreach($rowt as $test) {
 }
 
 
-echo "<a href='vendorHome.php'>Back</a>";
+echo "<a href='vendorHome.php'>Back</a> <a href='../logout.php'>Logout</a>";
 ?>

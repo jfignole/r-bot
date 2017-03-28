@@ -7,7 +7,7 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
            exit();
        }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -15,10 +15,10 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
 <link rel="stylesheet" href="../styles.css" type="text/css" />
 </head>
 <ul>
+<li><a>R-BOT</a></li>
 <li><a href="rm_request_list.php" style ="font-size:14px">Vendor Form</a></li>
 <li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
-<li><a href="../logout.php" style="font-size:14px">Logout?</a></li>
-<li><a>R-BOT</a></li>
+<li><a href="../logout.php" style="font-size:14px">Logout</a></li>
 </ul>
 <h1>CGI</h1>
 <h2>R-Bot</h2>

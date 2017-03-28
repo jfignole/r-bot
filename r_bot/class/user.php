@@ -1,5 +1,4 @@
 <?php
-
 class Users {
   public $username = null;
   public $password = null;
