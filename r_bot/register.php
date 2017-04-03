@@ -14,15 +14,15 @@ if(!(isset($_POST['register']))) { ?>
         <table>
         <form method="post">
           <tr><th><b>First Name:</b></th><td><input type="text" maxlenth="30" required autofocus name="first_name"/></td></tr>
-          <tr></tr>
+          
           <tr><th><b>Last Name:</b></th><td><input type="text" maxlenth="30" required  name="last_name"/></td></tr>
-          <tr></tr>
+          
           <tr><th><b>Username:</b></th><td><input type="text" maxlenth="30" required  name="username"/></td></tr>
-          <tr></tr>
+          
           <tr><th><b>Email:</b></th><td><input type="text" maxlenth="30" required name="email"/></td></tr>
-          <tr></tr>
+          
           <tr><th><b>Password:</b></th><td><input type="password" maxlenth="30" required name='password'/></td></tr>
-          <tr></tr>
+          
           <tr><th><b>Confirm Password:</b></th><td><input type="password" maxlength="30" required name="conpassword" />
           <tr><th><b>User Type:</b></th>
             <td><select name='user_type'>

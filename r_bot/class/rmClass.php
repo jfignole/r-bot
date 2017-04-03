@@ -1,4 +1,7 @@
 <?php
+/**
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+*/
 class rmClass {
   public $ptitle = null;
   public $sloc = null;
@@ -22,7 +25,9 @@ class rmClass {
   public $soNum = null;
   public $comments = null;
   public $time = null;
-
+/**
+* @param mixed $data = array() Array containing valued from the form
+*/
   public function __construct($data = array()) {
     if(isset($data['ptitle'])) $this->ptitle = stripslashes(strip_tags($data['ptitle']));
     if(isset($data['sloc'])) $this->sloc = stripslashes(strip_tags($data['sloc']));
@@ -52,6 +57,11 @@ public function storeFormValues($params) {
   //Store the parameters
   $this->__construct($params);
 }
+/**
+* @param mixed $rowt Rowt is the array that will be constructed in the __construct method
+* @throws \PDOException try/catch
+* @return Array
+*/
 public static function fillForm($rowt) {
   $successt = false;
   try{
@@ -69,7 +79,11 @@ public static function fillForm($rowt) {
   }
 }
 
-
+/**
+* @param mixed Empty
+* @throws \PDOException try/catch
+* @return Form submission confirmation
+*/
 public function processForm() {
   $correct = false;
   try {

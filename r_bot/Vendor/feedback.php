@@ -11,6 +11,13 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
  <html>
    <head>
       <link rel='stylesheet' href='../styles.css' type='text/css'>
+      <ul>
+      <li><a>R-BOT</a></li>
+      <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+      <li><a href="rm_request_list.php" style ="font-size:14px">RM_Form List</a></li>
+      <li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
+      <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+      </ul>
       <title>CV Feedback</title>
     </head>
     <body>
@@ -34,26 +41,26 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
             <th><b>Phone Number</b></th>
             <th><b>Best Time to Call<b></th>
         </tr>
-        <tr></tr>
+
         <tr><td><output type='text' maxlength="30" required name='name'><?php echo $rowt[0]['name']?></output></td>
             <td><output type="text" maxlenth="30" required  name="p_num"><?php echo $rowt[0]['phone_number']?></output></td>
             <td><output type='text' maxlength="30" required name='bc_time'><?php echo $rowt[0]['best_call_time']?></output></td></tr>
-        <tr></tr>
+
         <tr>
             <th><b>Visa Status<b></th>
             <th><b>IT Experience<b></th>
             <th><b>Relevant Experience<b></th>
         </tr>
-        <tr></tr>
+
         <tr><td><output type='text' maxlength="30" required name='v_status'><?php echo $rowt[0]['visa_status']?></output></td>
             <td><output type='text' maxlength="30" required name='it_exp'><?php echo $rowt[0]['it_exp']?></output></td>
             <td><output type='text' maxlength="30" required name='rel_exp'><?php echo $rowt[0]['relevant_exp']?></output></td>
         </tr>
-        <tr></tr>
+
         <tr>
             <th colspan="3"><b>Description<b></th>
         </tr>
-        <tr></tr>
+
         <tr>
             <td colspan="3"><output name="description" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['description'], 100, "<br />\n");?></td>
         </tr>
@@ -63,8 +70,5 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
        <tr>
          <td colspan="3"><output name="feedback" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['feedback'], 100, "<br />\n");?></td>
        </td>
-     </tr>
-     <tr>
-     <td colspan = "3"><a style="float: right"href='feedbackList.php'>Back</a><a href='../logout.php'>Logout</a></td>
      </tr>
  </table>

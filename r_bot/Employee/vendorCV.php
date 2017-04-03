@@ -21,6 +21,16 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
  <html>
    <head>
       <link rel='stylesheet' href='../styles.css' type='text/css'>
+      <ul> <!--Menu-->
+      <li><a>R-BOT</a></li>
+      <li><a href='home.php' style = "font-size:14px">Home</a></li>
+      <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+      <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+      <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+      <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+      <li><a href='vendorCVList.php' style = "font-size:14px">Back</a></li>
+      <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+      </ul>
       <title>Vendor CV</title>
    </head>
    <body>
@@ -32,26 +42,26 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
              <th class='VEND'><b>Phone Number</b></th>
              <th class='VEND'><b>Best Time to Call<b></th>
          </tr>
-         <tr></tr>
+
          <tr><td><output type='text' maxlength="30" required name='name'><?php echo $rowt[0]['name']?></output></td>
              <td><output type="text" maxlenth="30" required  name="p_num"><?php echo $rowt[0]['phone_number']?></output></td>
              <td><output type='text' maxlength="30" required name='bc_time'><?php echo $rowt[0]['best_call_time']?></output></td></tr>
-         <tr></tr>
+
          <tr>
              <th class='VEND'><b>Visa Status<b></th>
              <th class='VEND'><b>IT Experience<b></th>
              <th class='VEND'><b>Relevant Experience<b></th>
          </tr>
-         <tr></tr>
+
          <tr><td><output type='text' maxlength="30" required name='v_status'><?php echo $rowt[0]['visa_status']?></output></td>
              <td><output type='text' maxlength="30" required name='it_exp'><?php echo $rowt[0]['it_exp']?></output></td>
              <td><output type='text' maxlength="30" required name='rel_exp'><?php echo $rowt[0]['relevant_exp']?></output></td>
          </tr>
-         <tr></tr>
+
          <tr>
              <th class='VEND' colspan="3"><b>Description<b></th>
          </tr>
-         <tr></tr>
+
          <tr>
              <td colspan="3"><output name="description" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['description'], 100, "<br />\n");?></td>
          </tr>
@@ -67,8 +77,7 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
           <td colspan="2"><button type="submit" name="submit" value="Submit">Submit Feedback</button></td>
         </td>
       </form>
-      <td><a style="float: right"href='vendorCVList.php'>Back</a></td>
-      </tr>
+    </tr>
   </table>
   </body>
 </html>

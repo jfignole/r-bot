@@ -12,6 +12,12 @@ include("../config.php");
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+  <li><a href="rm_request_list.php" style ="font-size:14px">RM_Form List</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	Vendor CV List
 	</title>
@@ -19,7 +25,7 @@ include("../config.php");
 	<body>
     <h1>CGI</h1>
     <h2>R-Bot</h2>
-    <b><u>Feedback</b></u>
+    <b><u>Feedback</b></u><br/>
   </body>
 </html>
 <?php
@@ -36,7 +42,4 @@ foreach($rowt as $test) {
 	echo "<a href='feedback.php?id=$idt'>".$smt.": ".$nmt."</a><br/>";
 	}
 }
-
-
-echo "<a href='vendorHome.php'>Back</a> <a href='../logout.php'>Logout</a>";
 ?>

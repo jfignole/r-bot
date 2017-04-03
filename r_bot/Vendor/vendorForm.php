@@ -1,7 +1,6 @@
 <?php
 session_start();
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
        {
@@ -19,20 +18,26 @@ $stmt = $conn->prepare($sql);
 $stmt->execute(); #builds and runs query
 $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
                                     #names instead of indexes
- if( !(isset( $_POST['submit'] ) ) ) { ?>
+ if(!(isset($_POST['submit']))) { ?>
 
  <!DOCTYPE html>
  <html>
    <head>
       <link rel='stylesheet' href='../styles.css' type='text/css'>
+      <ul>
+      <li><a>R-BOT</a></li>
+      <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+      <li><a href="rm_request_list.php" style ="font-size:14px">RM_Form List</a></li>
+      <li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
+      <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+      </ul>
       <title>Registration Form</title>
    </head>
    <body>
      <h1>CGI</h1>
      <h2>R-Bot</h2>
-  
-      <h3>Application</h3>
-       <table>
+     <h3>Application</h3>
+     <table>
        <form method='post'>
          <tr><th colspan="3" class='VEND'><b>Job SO Number</b></th></tr>
          <tr><td colspan="3"><input type='text' maxlength='30' required name='so_number'value='<?php echo $rowt[0]['so_number']?>'/></td></tr>
@@ -40,39 +45,39 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
              <th class='VEND'><b>Phone Number</b></th>
              <th class='VEND'><b>Best Time to Call<b></th>
          </tr>
-         <tr></tr>
+
          <tr><td><input type='text' maxlength="30" required name='name'/></td>
              <td><input type="text" maxlenth="30" required  name="p_num"/></td>
-             <td><input type='text' maxlength="30" required name='bc_time'/></td></tr>
-         <tr></tr>
+             <td><input type='text' maxlength="30" required name='bc_time'/></td>
+         </tr>
+
          <tr>
              <th class='VEND'><b>Visa Status<b></th>
              <th class='VEND'><b>IT Experience<b></th>
              <th class='VEND'><b>Relevant Experience<b></th>
          </tr>
-         <tr></tr>
+
          <tr><td><input type='text' maxlength="30" required name='v_status'/></td>
              <td><input type='text' maxlength="30" required name='it_exp'/></td>
              <td><input type='text' maxlength="30" required name='rel_exp'/></td>
          </tr>
-         <tr></tr>
+
          <tr>
              <th class='VEND' colspan="3"><b>Description<b></th>
          </tr>
-         <tr></tr>
+
          <tr>
              <td colspan="3"><textarea name="description" rows="4" cols="100">Description</textarea></td>
          </tr>
-         <tr></tr>
+
          <tr><td colspan="3"><input type='submit' name='submit' value='Submit' />
            <input type='button' name="cancel" value="Cancel" onclick="location.href='vendorHome.php'" /></td></tr>
       </form>
 
       <form action="" method="post" enctype="multipart/form-data">
         <tr><th class='VEND' colspan="3">Upload CV</th></tr>
-        <tr><td><input type="file" name="pdfFile" /></td>
+        <tr><td colspan="2"><input type="file" name="pdfFile" /></td>
             <td><input type="submit" value="Upload CV" name="btn-upload" /></td>
-            <td><a style="float: right"href='rm_request_list.php'>Back</a> <a href='../logout.php'>Logout</a></td>
         </tr>
       </form>
     </table>
@@ -230,9 +235,6 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   					<tr>
   						<td colspan="3"><output id="Notes"  name="notes" rows="4" cols=""><?php echo wordwrap($rowt[0]['notes'], 120, "<br />\n");?></output></td>
   					</tr>
-  					<tr>
-            <td colspan="3"><a style="float: right"href='rm_request_list.php'>Back</a> <a href='../logout.php'>Logout</a></td>
-            </tr>
 		</table>
 
    </body>

@@ -1,41 +1,59 @@
 <?php
-include("config.php");
-$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sqle = "SELECT * FROM users WHERE user_type = 'Employee'";
-$stmte = $conn->prepare($sqle);
-$stmte->execute();
-$rowe = $stmte->fetch(PDO::FETCH_ASSOC);
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+//if "email" variable is filled out, send email
+  if (isset($_POST['email']))  {
 
-$sqlh = "SELECT * FROM users WHERE user_type = 'HR'";
-$stmth = $conn->prepare($sqlh);
-$stmth->execute();
-$rowh = $stmth->fetch(PDO::FETCH_ASSOC);
 
-$sqlv = "SELECT * FROM users WHERE user_type = 'Vendor'";
-$stmtv = $conn->prepare($sqlv);
-$stmtv->execute();
-$rowv = $stmtv->fetch(PDO::FETCH_ASSOC);
+      try {
+          $message = new Message($mail_options);
+          $message->send();
+          echo $message;
+      } catch (InvalidArgumentException $e) {
+        echo $e->getMessage();
+      }
 
-echo "<h3><u>Email:</u></h3>";
-echo "<hr />";
-echo "<header><h3>Classification: ".$rowe['user_type']."</h3><br>";
-do {
-echo "".'Name:'.$rowe['last_name'].', '.$rowe['first_name']."";
-echo "<a href='mailto:".$rowe['email']."'>".$rowe['email']."</a></br>";
-}while($rowe = $stmte->fetch(PDO::FETCH_ASSOC));
+      //Email information
+      $from = $_POST['from'];
+      $to = $_POST['to'];
+      $subject = $_POST['subject'];
+      $message = $_POST['message'];
+      $message = wordwrap($message, 80, "\r\n");
+      //send email
+      mail($to, "$subject", $message, "From:" . $from);
 
-echo "<hr />";
-echo "<header><h3>Classification: ".$rowh['user_type']."</h3><br>";
-do{
-echo "".'Name:'.$rowh['last_name'].', '.$rowh['first_name']."";
-echo "<a href='mailto:".$rowh['email']."'>".$rowh['email']."</a></br>";
-}while($rowh = $stmth->fetch(PDO::FETCH_ASSOC));
+      //Email response
 
-echo "<hr />";
-echo "<header><h3>Classification: ".$rowv['user_type']."</h3><br>";
-do{
-echo "".'Name:'.$rowv['last_name'].', '.$rowv['first_name']."";
-echo "<a href='mailto:".$rowv['email']."'>".$rowv['email']."</a></br>";
-}while($rowv = $stmtv->fetch(PDO::FETCH_ASSOC));
+      echo "Thank you for contacting us!";
+
+        //if "email" variable is not filled out, display the form
+
+    } else { ?>
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    </head>
+    <h1>CGI</h1>
+    <h2>R-BOT</h2>
+    <body>
+      <table>
+     <form class="email" method="post">
+       <tr><th>To: </th></tr>
+       <tr><td><input name="to" type="text" /></td></tr>
+       <tr><th>From: </th></tr>
+       <tr><td><input name="from" type="text" ></td></tr>
+       <tr><th>Subject: </th></tr>
+       <tr><td><input name="subject" type="text" /></td></tr>
+       <tr><th>Message:</th></tr>
+       <tr><td><textarea name="message" rows="15" cols="40"></textarea></td></tr>
+       <tr><td><input type="submit" value="Submit" style="float: right"/></td></tr>
+      </form>
+    </table>
+    </body>
+    </html>
+    <?php
+  }
 ?>

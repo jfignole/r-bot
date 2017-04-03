@@ -14,7 +14,7 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
 <meta charset="utf-8">
 <title>Home</title>
 <link rel="stylesheet" href="../styles.css" type="text/css" />
-<ul>
+<ul> <!--Menu-->
 <li><a>R-BOT</a></li>
 <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
 <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>

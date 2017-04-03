@@ -40,13 +40,13 @@ $rowv = $stmtv->fetch(PDO::FETCH_ASSOC);
   <td><?php do{
   echo "".'<h5>'.$rowh['last_name'].', '.$rowh['first_name'].": ";
   echo "<a href='mailto:".$rowh['email']."'>".$rowh['email']."</a></br></h5>";
-}while($rowh = $stmth->fetch(PDO::FETCH_ASSOC));?></td>
-<td> <?php do{
-echo "".'<h5>'.$rowv['last_name'].', '.$rowv['first_name'].": ";
-echo "<a href='mailto:".$rowv['email']."'>".$rowv['email']."</a></br></h5>";
-}while($rowv = $stmtv->fetch(PDO::FETCH_ASSOC)); ?> </td>
-</tr>
-<tr>
-  <td colspan='3'><a href='../logout.php'>Logout</a></td>
-</tr>
+  }while($rowh = $stmth->fetch(PDO::FETCH_ASSOC));?></td>
+  <td> <?php do{
+    echo "".'<h5>'.$rowv['last_name'].', '.$rowv['first_name'].": ";
+    echo "<a href='mailto:".$rowv['email']."'>".$rowv['email']."</a></br></h5>";
+  }while($rowv = $stmtv->fetch(PDO::FETCH_ASSOC)); ?> </td>
+  </tr>
+  <tr>
+    <td colspan='3'><a href='../logout.php'>Logout</a></td>
+  </tr>
 </html>

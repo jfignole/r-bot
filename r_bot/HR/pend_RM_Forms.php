@@ -13,6 +13,11 @@ include("../config.php");
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href='hrHome.php' style="font-size:14px">Home</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	Pending RM_Forms
 	</title>
@@ -37,6 +42,4 @@ foreach($rowt as $test) {
 	echo "<a href='HR_RM_Form.php?id=$id'>".$pt.": ".date('M j Y', strtotime($nm))."</a><br/>";#passes id of clicked link
 	}
 }
-echo "<a href='hrHome.php'>Back</a> <a href='../logout.php'>Logout</a>";
-
 ?>

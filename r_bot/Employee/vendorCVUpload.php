@@ -23,6 +23,14 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error t
  <html>
    <head>
      <link rel='stylesheet' href='../styles.css' type='text/css'>
+     <ul> <!--Menu-->
+     <li><a>R-BOT</a></li>
+     <li><a href='home.php' style = "font-size:14px">Home</a></li>
+     <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+     <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+     <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+     <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+     </ul>
      <title>Uploaded CVs</title>
    </head>
    <body>
@@ -41,12 +49,11 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error t
       <td><a href='../uploads/<?php echo $rowt[$i]['fileName']; ?>'
         target="_blank"><?php echo $rowt[$i]['fileName']; ?></a></td>
     </tr>
-</body>
-</html>
   <?php
 $i = $i + 1;
 }
 }
 ?>
 </table>
-<a href='home.php'>Back</a>
+</body>
+</html>

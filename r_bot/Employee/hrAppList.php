@@ -12,6 +12,14 @@ include("../config.php");
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul> <!--Menu-->
+  <li><a>R-BOT</a></li>
+  <li><a href='home.php' style = "font-size:14px">Home</a></li>
+  <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+  <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+  <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	Pending RM_Forms
 	</title>
@@ -19,7 +27,7 @@ include("../config.php");
 	<body>
     <h1>CGI</h1>
     <h2>R-Bot</h2>
-    <b><u>Pending RM Forms</b></u>
+    <b><u>Pending RM Forms</b></u><br/>
   </body>
 </html>
 <?php
@@ -35,6 +43,4 @@ foreach($date as $test) {
 	echo "<a href='HR_AP_RM_Form.php?id=$id'>".$nm."</a><br/>";
 	}
 }
-
-echo "<a href='home.php'>Back</a> <a href='../logout.php'>Logout</a>";
 ?>

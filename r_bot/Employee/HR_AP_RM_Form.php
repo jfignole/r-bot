@@ -21,6 +21,15 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul> <!--Menu-->
+  <li><a>R-BOT</a></li>
+  <li><a href='home.php' style = "font-size:14px">Home</a></li>
+  <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+  <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+  <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+  <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	GPO RM Form IIB Onshore
 	</title>
@@ -142,14 +151,11 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td colspan="3"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea></td>
 					</tr>
 					<tr>
-						<tr></tr>
-						<td colspan="2"><button type="submit" name="submit" value="Update" >Update Form</button>
+
+						<td colspan="3"><button type="submit" name="submit" value="Update" >Update Form</button>
               <input type="reset" value="Reset" name="reset" class="res">
             </td>
-            </td>
           </form>
-          <td><a style="float: right"href='home.php'>Back</a>
-              <a href="../logout.php" style="font-size:14px">Logout</a></td>
           </tr>
   </table>
 	</body>

@@ -20,6 +20,12 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href='hrHome.php' style="font-size:14px">Home</a></li>
+  <li><a href="pend_RM_Forms.php" style ="font-size:14px">Pending RM Form</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	GPO RM Form IIB Onshore
 	</title>
@@ -141,14 +147,12 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 						<td colspan="3"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea></td>
 					</tr>
 					<tr>
-						<tr></tr>
-						<td colspan="2"><button type="submit" name="submit" value="Submit" >Submit Form</button>
-              <input type="reset" value="Reset" name="reset" class="res">
-              <input name="logout" type="submit" value="Logout" onclick="location.href='../logout.php'"></td>
+
+						<td colspan="3"><button type="submit" name="submit" value="Submit" >Submit Form</button>
+              <input type="reset" value="Reset" name="reset" class="res"></td>
             </td>
-          </form>
-          <td><a style="float: right"href='hrHome.php'>Back</a><a href='../logout.php'>Logout</a></td>
           </tr>
+        </form>
   </table>
 
 	</body>

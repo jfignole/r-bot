@@ -13,6 +13,14 @@ if(!(isset( $_POST['submit']))) { ?>
 <html>
 <head>
 	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul> <!--Menu-->
+  <li><a>R-BOT</a></li>
+  <li><a href='home.php' style = "font-size:14px">Home</a></li>
+  <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+  <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+  <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
 	<title>
 	GPO RM Form IIB Onshore
 	</title>
@@ -111,8 +119,6 @@ if(!(isset( $_POST['submit']))) { ?>
               <input type="reset" value="Reset" name="reset" class="res">
 							</td>
 						</form>
-            <td><a style="float: right"href='home.php'>Back</a>
-                <a href="../logout.php">Logout</a></td>
             </tr>
 		</table>
 
@@ -123,6 +129,6 @@ if(!(isset( $_POST['submit']))) { ?>
 } else {
   $form = new rmClass;
   $form->storeFormValues($_POST);
-  echo $form->processForm($_POST) . "<body onload='javascript: window.location.href='mailto:jwash@test.com';'>";#stores new RM_FORM in the database
+  echo $form->processForm($_POST);#stores new RM_FORM in the database
   }
  ?>
