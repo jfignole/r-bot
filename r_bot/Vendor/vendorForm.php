@@ -1,4 +1,8 @@
-<?php
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 session_start();
 
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
@@ -7,7 +11,6 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
            header("Location:../logout.php");
            exit();
        }
-
 include("../config.php");
 $id = $_GET['id']; #gets id from previous page and queries the database to get
                    #information to fill in this particular RM_FORM
@@ -19,7 +22,6 @@ $stmt->execute(); #builds and runs query
 $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
                                     #names instead of indexes
  if(!(isset($_POST['submit']))) { ?>
-
  <!DOCTYPE html>
  <html>
    <head>
@@ -33,7 +35,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
       </ul>
       <title>Registration Form</title>
    </head>
-   <body>
+   <body class="vndr">
      <h1>CGI</h1>
      <h2>R-Bot</h2>
      <h3>Application</h3>
@@ -45,43 +47,37 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
              <th class='VEND'><b>Phone Number</b></th>
              <th class='VEND'><b>Best Time to Call<b></th>
          </tr>
-
          <tr><td><input type='text' maxlength="30" required name='name'/></td>
              <td><input type="text" maxlenth="30" required  name="p_num"/></td>
              <td><input type='text' maxlength="30" required name='bc_time'/></td>
          </tr>
-
          <tr>
              <th class='VEND'><b>Visa Status<b></th>
              <th class='VEND'><b>IT Experience<b></th>
              <th class='VEND'><b>Relevant Experience<b></th>
          </tr>
-
          <tr><td><input type='text' maxlength="30" required name='v_status'/></td>
              <td><input type='text' maxlength="30" required name='it_exp'/></td>
              <td><input type='text' maxlength="30" required name='rel_exp'/></td>
          </tr>
-
          <tr>
              <th class='VEND' colspan="3"><b>Description<b></th>
          </tr>
-
          <tr>
              <td colspan="3"><textarea name="description" rows="4" cols="100">Description</textarea></td>
          </tr>
-
          <tr><td colspan="3"><input type='submit' name='submit' value='Submit' />
            <input type='button' name="cancel" value="Cancel" onclick="location.href='vendorHome.php'" /></td></tr>
       </form>
-
       <form action="" method="post" enctype="multipart/form-data">
-        <tr><th class='VEND' colspan="3">Upload CV</th></tr>
-        <tr><td colspan="2"><input type="file" name="pdfFile" /></td>
+        <tr><th class='VEND'><b>SO_Number</b></th>
+            <th class='VEND' colspan="2"><b>Upload CV</b></th></tr>
+        <tr><td><input type="text" placeholder"SO Number" name="soNum" value="<?php echo $rowt[0]['so_number']?>"></td>
+            <td><input type="file" name="pdfFile" /></td>
             <td><input type="submit" value="Upload CV" name="btn-upload" /></td>
         </tr>
       </form>
     </table>
-
     <?php if(isset($_POST['btn-upload']))
     {
       $file = $_FILES['pdfFile']['name'];
@@ -94,10 +90,6 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
         $folder="../uploads/"; //upload Directory
         $filExt = strtolower(pathinfo($file,PATHINFO_EXTENSION)); //get file extension
         $val_ext = array('pdf', 'doc', 'docx'); //valid file extensions
-        //rename uploading file
-	      //$newFile = rand(1000,1000000).".".$filExt;
-        //is this needed?
-
         //allow valid file formats
         if(in_array($filExt, $val_ext)){
           //check File size '1MB'
@@ -118,17 +110,17 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
           $errMSG = "Sorry, only PDF, DOC & DOCX files are allowed.";
         }
       }
-
       //if no error occured, continue...
       if(!isset($errMSG))
       {
+        $id = $rowt[0]['so_number'];
         $query = $conn->prepare('INSERT INTO files (fileName, fileActual, file_type,
-		file_size) VALUES (:fName, :fActual, :fType, :fSize)');
+		file_size, so_number) VALUES (:fName, :fActual, :fType, :fSize, :so_number)');
         $query->bindParam(':fName',$file);
         $query->bindParam(':fActual',$newFile);
         $query->bindParam(':fType',$filExt);
         $query->bindParam(':fSize',$fileSize);
-
+        $query->bindParam('so_number', $id);
         if($query->execute())
         {
           $successMSG = "New CV successfully Added <a href='../email.php'.>E-mail</a>";
@@ -153,13 +145,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
           </tr>
           <tr>
             <th class='HR' colspan = "3"><output type="text" name="so_number"><?php echo $rowt[0]['so_number']?></output></th>
-
           </tr>
-          <tr>
-            <th class='HR' colspan="3" class='HR'><b>COMMENTS: </b></th>
-          </tr>
-          <td colspan="3"><output name="comments" rows="4" cols="100"><?php echo $rowt[0]['comments']?></output></td>
-        </tr>
   			<tr>
   							<th class='HR'><b>POSITION TITLE</b></th>
   							<th class='HR'><b>SEAT LOCATION</b></th>
@@ -226,25 +212,34 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
   							<th class='HR' colspan="3"><b>POSITION DESCRIPTION</b></th>
   					</tr>
   					<tr>
-  							<td colspan="3"><output id = "Position Requirements" name="posit_desc" rows="20" cols=""><?php echo wordwrap($rowt[0]['position_desc'], 120, "<br />\n");?></output></td>
+  							<td colspan="3"><output id = "Position Requirements" name="posit_desc" rows="20" cols="100"><?php echo wordwrap($rowt[0]['position_desc'], 120, "<br />\n");?></output></td>
   					</tr>
-  					<tr>
-
-  							<th class='HR' colspan="3"><b>NOTES (Optional):</b></th>
-  					</tr>
-  					<tr>
-  						<td colspan="3"><output id="Notes"  name="notes" rows="4" cols=""><?php echo wordwrap($rowt[0]['notes'], 120, "<br />\n");?></output></td>
-  					</tr>
+            <tr>
+              <th class='EMP' colspan="3" class='EMP'><b>COMMENTS: </b></th>
+            </tr>
+            <td colspan="3"><textarea name="comments" rows="4" cols="100" ><?php echo $rowt[0]['comments']?></textarea></td>
+          </tr>
 		</table>
-
    </body>
  </html>
-
  <?php
  } else {
    $vndr = new vendors;
    $vndr->storeFormValues( $_POST );
    echo $vndr->insertForm($_POST);#stores new vendor info in the database
- }
-
+   $id = $rowt[0]['RM_ID'];
+   try {
+     $status = 'APPLICATION RECEIVED';
+     $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     $sql = "UPDATE rmemform SET status = :status WHERE RM_ID = '$id'";
+     $stmt = $con->prepare($sql);
+     $stmt->execute(array(
+       ':status' => $status
+     ));
+   }catch(PDOException $e) {
+     $correct = false;
+     echo $e->getMessage();
+   }
+   }
  ?>

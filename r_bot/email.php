@@ -1,17 +1,23 @@
 <?php
+/**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 include("config.php");
 $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sqle = "SELECT * FROM users WHERE user_type = 'Employee'";
+//Get Project Manager emails from database
+$sqle = "SELECT * FROM users WHERE user_type = 'Project Manager'";
 $stmte = $conn->prepare($sqle);
 $stmte->execute();
 $rowe = $stmte->fetch(PDO::FETCH_ASSOC);
-
+//Get HR emails from database
 $sqlh = "SELECT * FROM users WHERE user_type = 'HR'";
 $stmth = $conn->prepare($sqlh);
 $stmth->execute();
 $rowh = $stmth->fetch(PDO::FETCH_ASSOC);
-
+//Get vendor emails from database
 $sqlv = "SELECT * FROM users WHERE user_type = 'Vendor'";
 $stmtv = $conn->prepare($sqlv);
 $stmtv->execute();
@@ -28,12 +34,12 @@ $rowv = $stmtv->fetch(PDO::FETCH_ASSOC);
 <h2>R-BOT</h2>
 <table>
   <tr>
-    <th>EMPLOYEE</th>
+    <th>Project Manager</th>
     <th>HUMAN RESOURCES</th>
     <th>VENDOR</th>
   </tr>
   <tr>
-    <td><?php do {
+   <td><?php do {
     echo "".'<h5>'.$rowe['last_name'].', '.$rowe['first_name'].": ";
     echo "<a href='mailto:".$rowe['email']."'>".$rowe['email']."</a></br></h5>";
   }while($rowe = $stmte->fetch(PDO::FETCH_ASSOC));?></td>

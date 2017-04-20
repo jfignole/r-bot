@@ -1,12 +1,19 @@
 <?php
-/*Checks whether the session is already there or not. If the user is logged in
-  already, then the session is there, if not then its not there. If it is true
-  then header redirects the user to the correct homepage depending on the user_type*/
+/**
+* Login page.
+*
+* Checks whether the session is already there or not. If the user is logged in
+* already, then the session is there, if not then its not there. If it is true
+* then header redirects the user to the correct homepage depending on the @var user_type
+* allowing a registered user to log in.
+*
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
  session_start();
-
  include_once("config.php");
- if ( !(isset($_POST['login'] ) ) ) { ?>
-
+ if (!(isset($_POST['login']))) { ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +21,6 @@
         <title>Login</title>
         <link rel="stylesheet" type="text/css" href="styles.css"/>
     </head>
-
     <body>
       <h1>CGI</h1>
       <h2>R-Bot</h2>
@@ -32,7 +38,7 @@
           <tr>
               <th><b>User Type:</b></th>
               <td><select name="user_type" >
-                  <option>Employee</option>
+                  <option>Project Manager</option>
                   <option>HR</option>
                   <option>Vendor</option>
                 </select></td>
@@ -45,14 +51,15 @@
         </table>
     </body>
 </html>
-
 <?php
 } else {
   $usr = new Users;
+  /**
+  *@param $_POST uses post method to pass user info to check against database for
+  * user login and validation
+  */
   $usr->storeFormValues( $_POST );
-  #passes user through the user class for validation checks user type
   if( $usr->userLogin() ) {
-
      if($usr->user_type == "Vendor") {
        $_SESSION['vend']='set';
       header("Location:Vendor/vendorHome.php");
@@ -65,7 +72,7 @@
 }
   else {
     $_SESSION['emp']='set';
-    header("Location:Employee/home.php");
+    header("Location:Project Manager/home.php");
     exit();
   }
 }

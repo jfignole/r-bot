@@ -1,4 +1,8 @@
-<?php
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
@@ -20,7 +24,7 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
       </ul>
       <title>CV Feedback</title>
     </head>
-    <body>
+    <body class="vndr">
      <h1>CGI</h1>
      <h2>R-Bot</h2>
       <?php
@@ -41,26 +45,21 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
             <th><b>Phone Number</b></th>
             <th><b>Best Time to Call<b></th>
         </tr>
-
         <tr><td><output type='text' maxlength="30" required name='name'><?php echo $rowt[0]['name']?></output></td>
             <td><output type="text" maxlenth="30" required  name="p_num"><?php echo $rowt[0]['phone_number']?></output></td>
             <td><output type='text' maxlength="30" required name='bc_time'><?php echo $rowt[0]['best_call_time']?></output></td></tr>
-
         <tr>
             <th><b>Visa Status<b></th>
             <th><b>IT Experience<b></th>
             <th><b>Relevant Experience<b></th>
         </tr>
-
         <tr><td><output type='text' maxlength="30" required name='v_status'><?php echo $rowt[0]['visa_status']?></output></td>
             <td><output type='text' maxlength="30" required name='it_exp'><?php echo $rowt[0]['it_exp']?></output></td>
             <td><output type='text' maxlength="30" required name='rel_exp'><?php echo $rowt[0]['relevant_exp']?></output></td>
         </tr>
-
         <tr>
             <th colspan="3"><b>Description<b></th>
         </tr>
-
         <tr>
             <td colspan="3"><output name="description" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['description'], 100, "<br />\n");?></td>
         </tr>

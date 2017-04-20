@@ -1,27 +1,69 @@
 <?php
+/**
+* @package r_bot
+*/
 class Users {
+  /**
+  * @author Jonathan Fignole <jonathan.fignole@cgi.com>
+  * @copyright  2017 CGI Group Inc.
+  * @package r_bot
+  */
+  /**
+  * @var string  username from the database and completed HTML registration form
+  */
   public $username = null;
+  /**
+  * @var string  password from the database and completed HTML registration form
+  */
   public $password = null;
+  /**
+  * @var string  first_name from the database and completed HTML registration form
+  */
   public $first_name = null;
+  /**
+  * @var string  last_name from the database and completed HTML registration form
+  */
   public $last_name = null;
+  /**
+  * @var string  email from the database and completed HTML registration form
+  */
   public $email = null;
+  /**
+  * @var string  user_type from the database and completed HTML registration form
+  */
   public $user_type = null;
+  /**
+  * @var string  salt used to encrypt and hasah password for the database
+  */
   public $salt = "i3YkuThgzKgeyzH00me33LleZtZaLOVr5pB7QgH7cGW3nHqivuWIo11tCpr6h6RQ";
-
+  /**
+  * Sets the object's properties using the values in the supplied array
+  *
+  * @param assoc The property values
+  */
   public function __construct($data = array()){
     if(isset($data['first_name'])) $this->first_name = stripslashes(strip_tags($data['first_name']));
     if(isset($data['last_name'])) $this->last_name = stripslashes(strip_tags($data['last_name']));
     if(isset($data['username'])) $this->username = stripslashes(strip_tags($data['username']));
-      if(isset($data['email'])) $this->email = stripslashes(strip_tags($data['email']));
+    if(isset($data['email'])) $this->email = stripslashes(strip_tags($data['email']));
     if(isset($data['password'])) $this->password = stripslashes(strip_tags($data['password']));
     if(isset($data['user_type'])) $this->user_type = stripslashes(strip_tags($data['user_type']));
   }
-  //Get the $_POST data from the forms and give it to the __construct method
+  /**
+  * Sets the object's properties using the edit form post values in the supplied array
+  *
+  *@param assoc The form post values
+  */
   public function storeFormValues($params) {
     //Store the parameters
     $this->__construct($params);
   }
-
+  /**
+  * Verifies User against database for Login.
+  *
+  * @throws PDOException if the PDO doesn't exist or config.php isn't included
+  * @return Form submission confirmation
+  */
   public function userLogin() {
     //Success variable will be used to return if the login was successful or not
     $success = false;
@@ -48,22 +90,28 @@ class Users {
       if($valid) {
         $success = true;
       }
-
       $con = null;
       return $success;
     }catch (PDOException $e) {
       echo $e->getMessage();
-
       return $success;
     }
   }
-
+  /**
+  * Inserts the registered user into the database.
+  *
+  * @param mixed Empty
+  * @throws PDOException if the PDO doesn't exist or config.php isn't included
+  * @return Form submission confirmation
+  */
   public function register() {
     $correct = false;
     try {
           $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
           $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sql = "INSERT INTO users(first_name, last_name, username, email, password, user_type) VALUES(:first_name, :last_name, :username, :email, :password, :user_type)";
+          $sql = "INSERT INTO users(first_name, last_name, username, email,
+            password, user_type) VALUES(:first_name, :last_name, :username,
+              :email, :password, :user_type)";
 
           $stmt = $con->prepare($sql);
           $stmt->bindValue("first_name", $this->first_name, PDO::PARAM_STR);
@@ -78,7 +126,5 @@ class Users {
           return $e->getMmessage();
         }
     }
-
   }
-
  ?>

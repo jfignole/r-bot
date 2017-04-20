@@ -1,4 +1,8 @@
-<?php
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
@@ -22,10 +26,29 @@ if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
 </ul>
 <h1>CGI</h1>
 <h2>R-Bot</h2>
-<body>
-<?php echo "Welcome to the Vendor Page!"?>
-
-<br>
-
+<body class="vndr">
+<?php echo "Welcome to the Vendor Page!";
+require_once("../class/rmClass.php");
+$date = array(array());
+$date = rmClass::vendFillForm($date);
+#lists RM Forms available by date filled out?>
+<table>
+    <caption>CURRENT RM_FORM STATUS</caption>
+  <tr>
+    <th>POSITION TITLE</th>
+    <th>DATE</th>
+    <th># OF RESOURCES NEEDED</th>
+  </tr>
+  <tr><?php foreach($date as $test) {
+    if(is_array($test))
+    {
+      $pt = $test['position_title'];
+      $dt = $test['date_submitted'];
+      $nr = $test['num_resource_need'];
+      $id = $test['RM_ID'];
+      $so = $test['so_number'];
+    echo "<td><a href='vendorForm.php?id=$id'>" . $so . ": " . $pt . "</a></td><td>" . date("Y-m-d", strtotime($dt)) . "</td><td>" . $nr . "</td></tr>";
+    }
+  }?>
 </body>
 </html>

@@ -1,4 +1,8 @@
-<?php
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 session_start();#session_start();
 if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
                              #Redirect to Login Page
@@ -22,7 +26,7 @@ include("../config.php");
 	Vendor CV List
 	</title>
 </head>
-	<body>
+	<body class="vndr">
     <h1>CGI</h1>
     <h2>R-Bot</h2>
     <b><u>Feedback</b></u><br/>

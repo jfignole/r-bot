@@ -1,4 +1,8 @@
-<?php
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
 session_start();
 if(!isset($_SESSION['hr'])){
            header("Location:../logout.php");
@@ -15,7 +19,6 @@ $stmt->execute();#Builds and runs query
 $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
                                           #names instead of indexes
  if(!(isset($_POST['submit']))) { ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +33,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 	GPO RM Form IIB Onshore
 	</title>
 </head>
-	<body>
+	<body class="hnr">
     <h1>CGI</h1>
     <h2>R-Bot</h2>
 		<table>
@@ -46,14 +49,17 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
         </tr>
         <tr>
           <th class='HR' colspan = "3"><input type="text" placeholder"SO Number" name="soNum"></th>
-
         </tr>
-        <tr>
-          <th class='HR' colspan="3" class='HR'><b>COMMENTS: </b></th>
+        <tr><th class='HR'><b>REJECT</b></th>
+            <th colspan="2" class="HR"><b>REASON FOR REJECTION</b></th>
         </tr>
-        <td colspan="3"><textarea name="comments" rows="4" cols="100">Comments</textarea></td>
-      </tr>
-			<tr>
+        <tr><td><select name ="rej_opt">
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+            </td>
+            <td colspan="2"><textarea  name="rej_reason" rows="4" cols="60"></textarea></td>
+        </tr>
+			  <tr>
 							<th class='HR'><b>POSITION TITLE</b></th>
 							<th class='HR'><b>SEAT LOCATION</b></th>
 							<th class='HR'><b>DATE SUBMITTED TO CGI</b></th>
@@ -90,7 +96,6 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
                       <option value="Consulting" <?php if($rowt[0]['job_type'] == "Consulting") echo "selected='selected'";?>>Consulting</option>
                     </select>
                   </td>
-
                     </select>
               </td>
 							<td><input type="date" value="<?php echo $rowt[0]['est_resource_start_dt']?>" name="rsdate"></td>
@@ -139,64 +144,76 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 					<tr>
 							<td colspan="3"><textarea id = "Position Requirements" name="posit_desc" rows="8" cols="100"><?php echo $rowt[0]['position_desc']?></textarea></td>
 					</tr>
-					<tr>
-
-							<th class='HR' colspan="3"><b>NOTES (Optional):</b></th>
+          <tr>
+            <th class='EMP' colspan="3" class='EMP'><b>COMMENTS: </b></th>
+          </tr>
+          <td colspan="3"><textarea name="comments" rows="4" cols="100" ><?php echo $rowt[0]['comments']?></textarea></td>
+        </tr>
+          <tr>
+							<th class='HR' colspan="2"><b>NOTES (Internal Only):</b></th>
+              <th class='HR' ><b>STATUS</b></th>
 					</tr>
+					<tr><td colspan="2"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea>
+              <td><select name="status">
+    									<option value="SO_NUM APPLIED" <?php if($rowt[0]['status'] == "SO_NUM APPLIED") echo "selected='selected'";?>>SO_Number Applied</option>
+                      <option value="REJECTED" <?php if($rowt[0]['status'] == "REJECTED") echo "selected='selected'";?>>REJECTED</option>
+    							</select></tr>
 					<tr>
-						<td colspan="3"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea></td>
-					</tr>
-					<tr>
-
 						<td colspan="3"><button type="submit" name="submit" value="Submit" >Submit Form</button>
               <input type="reset" value="Reset" name="reset" class="res"></td>
             </td>
           </tr>
         </form>
   </table>
-
 	</body>
 </html>
-
 <?php
 } else {
   if(empty($_POST['soNum'])){
     echo "SO_Number required. No changes applied. <a href=\"javascript:history.go(-1)\">GO BACK</a>";
   }else {
+    if($_POST['rej_opt'] == 'YES' && empty($_POST['rej_reason'])){
+      echo "Reason for Rejection Required. No changes applied. <a href=\"javascript:history.go(-1)\">GO BACK</a>";
+    }else {
   try{
   $con = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
   $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sql = "UPDATE rmemform SET position_title = :ptitle, seat_location = :sloc, cgi_submit_dt = :dsub,
-    num_resource_need = :numres, proj_start_dt = :pstart, tmfp = :TMFP, job_type = :type, est_resource_start_dt = :rsdate,
-    est_resource_end_dt = :rendate, proj_client = :proj_client, confidence = :conf_perc, hiring_manager = :hir_manag, senior_manager = :sen_manag,
-    cgi_engage_manager = :engag_manag, proj_code = :pcode, target_salary = :t_salary, rate_crd_cat_lvl = :rcc_level, position_desc = :posit_desc,
-    recommended_hiring = :rec_hire, notes = :notes, so_number = :soNum, comments = :comments WHERE RM_ID = '$id'";
-
-
+  $sql = "UPDATE rmemform SET position_title = :ptitle, seat_location = :sloc,
+          cgi_submit_dt = :dsub, num_resource_need = :numres, proj_start_dt = :pstart,
+          tmfp = :TMFP, job_type = :type, est_resource_start_dt = :rsdate,
+          est_resource_end_dt = :rendate, proj_client = :proj_client, confidence = :conf_perc,
+          hiring_manager = :hir_manag, senior_manager = :sen_manag, cgi_engage_manager = :engag_manag,
+          proj_code = :pcode, target_salary = :t_salary, rate_crd_cat_lvl = :rcc_level,
+          position_desc = :posit_desc, recommended_hiring = :rec_hire,
+          notes = notes + :notes, so_number = :soNum, comments = :comments,
+          status = :status, rej_opt = :rej_opt, rej_reason = :rej_reason WHERE RM_ID = '$id'";
   $stmt = $con->prepare($sql);
   $stmt->execute(array(
-    ':ptitle' =>$_POST['ptitle'],
-    ':sloc' =>$_POST['sloc'],
-    ':dsub' =>date("Y-m-d", strtotime($_POST['dsub'])),
-    ':numres' =>$_POST['numres'],
-    ':pstart' =>date("Y-m-d", strtotime($_POST['pstart'])),
-    ':TMFP' =>$_POST['TMFP'],
-    ':type' =>$_POST['type'],
-    ':rsdate' =>date("Y-m-d", strtotime($_POST['rsdate'])),
-    ':rendate' =>date("Y-m-d", strtotime($_POST['rendate'])),
-    ':proj_client' =>$_POST['proj_client'],
-    ':conf_perc' =>$_POST['conf_perc'],
-    ':hir_manag' =>$_POST['hir_manag'],
-    ':sen_manag' =>$_POST['sen_manag'],
-    ':engag_manag' =>$_POST['engag_manag'],
-    ':pcode' =>$_POST['pcode'],
-    ':t_salary' =>$_POST['t_salary'],
-    ':rcc_level' =>$_POST['rcc_level'],
-    ':posit_desc' =>$_POST['posit_desc'],
-    ':rec_hire' =>$_POST['rec_hire'],
-    ':notes' =>$_POST['notes'],
-    ':soNum' =>$_POST['soNum'],
-    ':comments' =>$_POST['comments']
+    ':ptitle' => $_POST['ptitle'],
+    ':sloc' => $_POST['sloc'],
+    ':dsub' => date("Y-m-d", strtotime($_POST['dsub'])),
+    ':numres' => $_POST['numres'],
+    ':pstart' => date("Y-m-d", strtotime($_POST['pstart'])),
+    ':TMFP' => $_POST['TMFP'],
+    ':type' => $_POST['type'],
+    ':rsdate' => date("Y-m-d", strtotime($_POST['rsdate'])),
+    ':rendate' => date("Y-m-d", strtotime($_POST['rendate'])),
+    ':proj_client' => $_POST['proj_client'],
+    ':conf_perc' => $_POST['conf_perc'],
+    ':hir_manag' => $_POST['hir_manag'],
+    ':sen_manag' => $_POST['sen_manag'],
+    ':engag_manag' => $_POST['engag_manag'],
+    ':pcode' => $_POST['pcode'],
+    ':t_salary' => $_POST['t_salary'],
+    ':rcc_level' => $_POST['rcc_level'],
+    ':posit_desc' => $_POST['posit_desc'],
+    ':rec_hire' => $_POST['rec_hire'],
+    ':notes' => $_POST['notes'],
+    ':soNum' => $_POST['soNum'],
+    ':comments' => $_POST['comments'],
+    ':status' => $_POST['status'],
+    ':rej_opt' => $_POST['rej_opt'],
+    ':rej_reason' => $_POST['rej_reason']
   ));
   $correct = true;
   echo "Form Updated Successfully <br/> <a href='hrHome.php'>Home</a><br/><a href='../email.php'.>E-mail</a><br/><a href='../logout.php'>Logout</a>";
@@ -204,6 +221,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
   $correct = false;
   echo $e->getMessage();
   }
+}
 }
 }
 ?>
