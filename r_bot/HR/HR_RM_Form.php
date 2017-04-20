@@ -26,11 +26,10 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
   <ul>
   <li><a>R-BOT</a></li>
   <li><a href='hrHome.php' style="font-size:14px">Home</a></li>
-  <li><a href="pend_RM_Forms.php" style ="font-size:14px">Pending RM Form</a></li>
   <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
   </ul>
 	<title>
-	GPO RM Form IIB Onshore
+    HR_RM_FORM
 	</title>
 </head>
 	<body class="hnr">

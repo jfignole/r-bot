@@ -27,10 +27,6 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
   <ul> <!--Menu-->
   <li><a>R-BOT</a></li>
   <li><a href='home.php' style = "font-size:14px">Home</a></li>
-  <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
-  <li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
-  <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
-  <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
   <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
   </ul>
 	<title>

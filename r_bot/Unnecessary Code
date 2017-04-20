@@ -1,0 +1,381 @@
+HR/pend_RM_Forms.php [
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+session_start();
+if(!isset($_SESSION['hr'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+include("../config.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href='hrHome.php' style="font-size:14px">Home</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
+	<title>
+	Pending RM_Forms
+	</title>
+</head>
+	<body class="hnr">
+    <h1>CGI</h1>
+    <h2>R-Bot</h2>
+    <b><u>Pending RM Forms</b></u><br/>
+  </body>
+</html>
+<?php
+require_once("../class/rmClass.php");
+$rowt = array(array());
+$rowt = rmClass::fillForm($rowt);
+foreach($rowt as $test) {
+	if(is_array($test))
+	{
+		$id = $test['RM_ID'];
+		$nm = $test['lastUpdated'];
+    $pt = $test['position_title'];
+	echo "<a href='HR_RM_Form.php?id=$id'>".$pt.": ".date('M j Y', strtotime($nm))."</a><br/>";#passes id of clicked link
+	}
+}
+?>
+]
+
+Project Manager/home.php [
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+<li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+]
+
+Project Manager/HR_AP_RM_Form.php [
+<li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+<li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+]
+
+Project Manager/hrAppList.php [
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+session_start();
+if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+include("../config.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul> <!--Menu-->
+  <li><a>R-BOT</a></li>
+  <li><a href='home.php' style = "font-size:14px">Home</a></li>
+  <li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+  <li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+  <li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
+	<title>
+	Pending RM_Forms
+	</title>
+</head>
+	<body class="emp">
+    <h1>CGI</h1>
+    <h2>R-Bot</h2>
+    <b><u>Pending RM Forms</b></u><br/>
+  </body>
+</html>
+<?php
+require_once("../class/rmClass.php");
+$date = array(array());
+$date = rmClass::fillForm($date);
+#lists RM Forms available by date filled out
+foreach($date as $test) {
+	if(is_array($test))
+	{
+		$id = $test['RM_ID'];
+		$nm = $test['so_number'];
+	echo "<a href='HR_AP_RM_Form.php?id=$id'>".$nm."</a><br/>";
+	}
+}
+?>
+]
+
+Project Manager/RM_Form.php [
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+<li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+]
+
+Project Manager/vendorCV.php [
+<li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+<li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+<li><a href='vendorCVList.php' style = "font-size:14px">Back</a></li>
+]
+
+Project Manager/vendorCVList.php [
+<li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVUpload.php" style = "font-size:14px">Uploaded Vendor CVs</a></li>
+]
+
+Project Manager/vendorCVUpload.php [
+<li><a href="RM_Form.php" style ="font-size:14px">New RM_Form</a></li>
+<li><a href="hrAppList.php" style = "font-size:14px">HR Approved List</a></li>
+<li><a href="vendorCVList.php" style = "font-size:14px">Vendor CVs</a></li>
+]
+
+Vendor/feedbackList.php [
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+session_start();#session_start();
+if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+include("../config.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+  <li><a href="rm_request_list.php" style ="font-size:14px">RM_Form List</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
+	<title>
+	Vendor CV List
+	</title>
+</head>
+	<body class="vndr">
+    <h1>CGI</h1>
+    <h2>R-Bot</h2>
+    <b><u>Feedback</b></u><br/>
+  </body>
+</html>
+<?php
+require_once("../class/vendors.php");
+$rowt = array(array());
+$rowt = vendors::fillForm($rowt);
+#lists Vendor CVs by name
+foreach($rowt as $test) {
+	if(is_array($test))
+	{
+		$idt = $test['V_ID'];
+		$nmt = $test['name'];
+    $smt = $test['so_number'];
+	echo "<a href='feedback.php?id=$idt'>".$smt.": ".$nmt."</a><br/>";
+	}
+}
+?>
+]
+
+Vendor/feedback.php [
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+session_start();
+if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+?>
+<!DOCTYPE html>
+ <html>
+   <head>
+      <link rel='stylesheet' href='../styles.css' type='text/css'>
+      <ul>
+      <li><a>R-BOT</a></li>
+      <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+      <li><a href="rm_request_list.php" style ="font-size:14px">RM_Form List</a></li>
+      <li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
+      <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+      </ul>
+      <title>CV Feedback</title>
+    </head>
+    <body class="vndr">
+     <h1>CGI</h1>
+     <h2>R-Bot</h2>
+      <?php
+      include("../config.php");
+      $id = $_GET['id'];#gets id from previous page and queries the database to get
+                         #information to fill in this particular RM_FORM
+      $conn=new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);#DB Connection
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);#sets PDO error types
+      $sql = "SELECT * FROM vendor WHERE V_ID = '$id'";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();#builds and runs query
+      $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#fetches query into array with column
+                                                #names instead of indexes
+      ?>
+      <h3>Feedback for <?php echo $rowt[0]['so_number'] .": ". $rowt[0]['name']?></h3>
+      <table>
+            <tr><th><b>Name</b></th>
+            <th><b>Phone Number</b></th>
+            <th><b>Best Time to Call<b></th>
+        </tr>
+        <tr><td><output type='text' maxlength="30" required name='name'><?php echo $rowt[0]['name']?></output></td>
+            <td><output type="text" maxlenth="30" required  name="p_num"><?php echo $rowt[0]['phone_number']?></output></td>
+            <td><output type='text' maxlength="30" required name='bc_time'><?php echo $rowt[0]['best_call_time']?></output></td></tr>
+        <tr>
+            <th><b>Visa Status<b></th>
+            <th><b>IT Experience<b></th>
+            <th><b>Relevant Experience<b></th>
+        </tr>
+        <tr><td><output type='text' maxlength="30" required name='v_status'><?php echo $rowt[0]['visa_status']?></output></td>
+            <td><output type='text' maxlength="30" required name='it_exp'><?php echo $rowt[0]['it_exp']?></output></td>
+            <td><output type='text' maxlength="30" required name='rel_exp'><?php echo $rowt[0]['relevant_exp']?></output></td>
+        </tr>
+        <tr>
+            <th colspan="3"><b>Description<b></th>
+        </tr>
+        <tr>
+            <td colspan="3"><output name="description" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['description'], 100, "<br />\n");?></td>
+        </tr>
+        <tr>
+          <th colspan="3"><b>Feedback<b></th>
+        </tr>
+       <tr>
+         <td colspan="3"><output name="feedback" rows="4" cols="100"></output><?php echo wordwrap($rowt[0]['feedback'], 100, "<br />\n");?></td>
+       </td>
+     </tr>
+ </table>
+]
+
+Vendor/rm_request_list.php [
+<?php /**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+session_start();
+if(!isset($_SESSION['vend'])) #If session is not set, user isn't logged in.
+                             #Redirect to Login Page
+       {
+           header("Location:../logout.php");
+           exit();
+       }
+include("../config.php");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='../styles.css' type='text/css'>
+  <ul>
+  <li><a>R-BOT</a></li>
+  <li><a href="vendorHome.php" style= "font-size:14px">Home</a></li>
+  <li><a href="feedbackList.php" style="font-size:14px">Feedback</a></li>
+  <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
+  </ul>
+	<title>
+	Pending RM_Forms
+	</title>
+</head>
+	<body class="vndr">
+    <h1>CGI</h1>
+    <h2>R-Bot</h2>
+    <b><u>Pending RM Forms</b></u><br/>
+  </body>
+</html>
+<?php
+require_once("../class/rmClass.php");
+$rowt = array(array());
+$rowt = rmClass::fillForm($rowt);
+#lists RM forms available by date filled out
+foreach($rowt as $test) {
+	if(is_array($test))
+	{
+		$id = $test['RM_ID'];
+		$nm = $test['so_number'];
+	echo "<a href='vendorForm.php?id=$id'>".$nm."</a><br/>";
+	}
+}
+?>
+]
+
+email.php [
+<?php
+/**
+* @package r_bot
+* @author Jonathan Fignole <jonathan.fignole@cgi.com>
+* @copyright  2017 CGI Group Inc.
+*/
+include("config.php");
+$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//Get Project Manager emails from database
+$sqle = "SELECT * FROM users WHERE user_type = 'Project Manager'";
+$stmte = $conn->prepare($sqle);
+$stmte->execute();
+$rowe = $stmte->fetch(PDO::FETCH_ASSOC);
+//Get HR emails from database
+$sqlh = "SELECT * FROM users WHERE user_type = 'HR'";
+$stmth = $conn->prepare($sqlh);
+$stmth->execute();
+$rowh = $stmth->fetch(PDO::FETCH_ASSOC);
+//Get vendor emails from database
+$sqlv = "SELECT * FROM users WHERE user_type = 'Vendor'";
+$stmtv = $conn->prepare($sqlv);
+$stmtv->execute();
+$rowv = $stmtv->fetch(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+</head>
+<h1>CGI</h1>
+<h2>R-BOT</h2>
+<table>
+  <tr>
+    <th>Project Manager</th>
+    <th>HUMAN RESOURCES</th>
+    <th>VENDOR</th>
+  </tr>
+  <tr>
+   <td><?php do {
+    echo "".'<h5>'.$rowe['last_name'].', '.$rowe['first_name'].": ";
+    echo "<a href='mailto:".$rowe['email']."'>".$rowe['email']."</a></br></h5>";
+  }while($rowe = $stmte->fetch(PDO::FETCH_ASSOC));?></td>
+  <td><?php do{
+  echo "".'<h5>'.$rowh['last_name'].', '.$rowh['first_name'].": ";
+  echo "<a href='mailto:".$rowh['email']."'>".$rowh['email']."</a></br></h5>";
+  }while($rowh = $stmth->fetch(PDO::FETCH_ASSOC));?></td>
+  <td> <?php do{
+    echo "".'<h5>'.$rowv['last_name'].', '.$rowv['first_name'].": ";
+    echo "<a href='mailto:".$rowv['email']."'>".$rowv['email']."</a></br></h5>";
+  }while($rowv = $stmtv->fetch(PDO::FETCH_ASSOC)); ?> </td>
+  </tr>
+  <tr>
+    <td colspan='3'><a href='../logout.php'>Logout</a></td>
+  </tr>
+</html>
+]
