@@ -49,6 +49,7 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
           <th>CGI ENGAGEMENT MANAGER</th>
           <th>RATE CARD-CATEGORY-LEVEL</th>
           <th>STATUS</th>
+          <th>OPEN / CLOSED</th>
         </tr>
         <tr><?php foreach($date as $test) {
         	if(is_array($test))
@@ -62,7 +63,7 @@ if(!isset($_SESSION['emp'])) #If session is not set, user isn't logged in.
         		$st = $test['status'];
         	echo "<td><a href='HR_AP_RM_Form.php?id=$id'>" . $pt . "</a></td><td>"
           . date("Y-m-d", strtotime($dt)) . "</td><td>" . $nr . "</td><td>" . $mng
-          . "</td><td>" . $rcc . "</td><td>" . $st . "</td><td></tr>";
+          . "</td><td>" . $rcc . "</td><td>" . $st . "</td><td><a href='close.php?id=$id'>Close Access</a></td></tr>";
         	}
         }
   ?><br/>

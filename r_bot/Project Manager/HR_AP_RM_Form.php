@@ -34,7 +34,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
   <li><a href="../logout.php" style="font-size:14px">Logout</a></li>
   </ul>
 	<title>
-	GPO RM Form IIB Onshore
+	HR_AP_RM_FORM
 	</title>
 </head>
 	<body class="emp">
@@ -152,7 +152,7 @@ $rowt = $stmt->fetchAll(PDO::FETCH_ASSOC);#Fetches query into array with column
 					<tr><td colspan="2"><textarea id="Notes"  name="notes" rows="4" cols="100"><?php echo $rowt[0]['notes']?></textarea>
               <td><select name="status">
                       <option value="WAITING FOR VENDOR RESPONSE" <?php if($rowt[0]['status'] == "WAITING FOR VENDOR RESPONSE") echo "selected='selected'";?>>Waiting for Vendor Response</option>
-    							</select></tr>
+    							</select></td></tr>
 					<tr>
 						<td colspan="3"><button type="submit" name="submit" value="Send to Vendor" >Send to Vendor</button>
               <input type="reset" value="Reset" name="reset" class="res">
