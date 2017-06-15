@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpoffice/phpword": "^0.13.0",
+        "phpmailer/phpmailer": "^5.2",
+        "google/auth": "^0.11.1"
+    }
+}
